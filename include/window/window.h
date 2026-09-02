@@ -28,9 +28,9 @@ class KovWindow {
     protected:
     const void log(std::string message);
 
+    Renderer* renderer = nullptr;
     const bool* kb_state;
     int curr_frame;
-    Renderer* renderer;
 
     private:
     bool _quit = false;

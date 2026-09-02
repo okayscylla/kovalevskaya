@@ -29,6 +29,8 @@ void KovWindow::init(int w, int h, std::string title, int t_fpss) {
 
     setTargetFPS(t_fpss);
 
+    setRenderer(new Renderer);
+
     kb_state = SDL_GetKeyboardState(NULL);
 }
 
@@ -43,7 +45,7 @@ void KovWindow::resize(int w, int h) {
 
     SDL_SetWindowSize(_sdlwindow, width, height);
 
-    renderer->init(_sdlhgpu, width, height);
+    renderer->init(_sdlhgpu, _sdlwindow, width, height);
 }
 
 void KovWindow::setTargetFPS(int fps) {
@@ -62,30 +64,34 @@ void KovWindow::poll() {
 };
 
 void KovWindow::setRenderer(Renderer* new_renderer) {
-    renderer->cleanup();
-    delete renderer;
+    if (renderer != nullptr) {
+        renderer->cleanup();
+        delete renderer;
+    }
 
-    renderer->init(_sdlhgpu, width, height);
     renderer = new_renderer;
+    renderer->init(_sdlhgpu, _sdlwindow, width, height);
 }
 
 void KovWindow::draw() {
-    renderer->draw(nullptr);
+    renderer->draw();
 
     curr_frame += 1;
 }
 
 void KovWindow::gracefulExit() {
-    renderer->cleanup();
+    if (renderer != nullptr) {
+        renderer->cleanup();
+        delete renderer;
+    }
 
     SDL_ReleaseWindowFromGPUDevice(_sdlhgpu, _sdlwindow);
     SDL_DestroyWindow(_sdlwindow);
     SDL_DestroyGPUDevice(_sdlhgpu);
 
     SDL_Quit();
-
+    
     delete _sdlevent;
-    delete renderer;
 
     _quit = true;
 }

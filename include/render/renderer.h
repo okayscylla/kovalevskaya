@@ -1,17 +1,17 @@
-#pragma 
+#pragma once
 
 #include <SDL3/SDL.h>
-#include <cstdint>
+
 
 class Renderer {
     public:
-    void virtual init(SDL_GPUDevice* hdlgpu, int w, int h);
+    void virtual init(SDL_GPUDevice* gpu, SDL_Window* window, int w, int h);
     void virtual cleanup();
 
-    void virtual draw(uint32_t* b);
+    void virtual draw();
 
     protected:
-    void virtual setPixel();
-
-    SDL_GPUDevice* gpu;
+    int width, height;
+    SDL_GPUDevice* _hdlgpu;
+    SDL_Window* _hdlwindow;
 };

@@ -13,15 +13,15 @@ void Renderer::draw() {
     SDL_GPUCommandBuffer* _cmdbuf;
     _cmdbuf = SDL_AcquireGPUCommandBuffer(_hdlgpu);
 
-    SDL_GPUTexture* swapchain_texture;
+    SDL_GPUTexture* _swapchain_texture;
     SDL_WaitAndAcquireGPUSwapchainTexture(
         _cmdbuf, _hdlwindow,
-        &swapchain_texture,
+        &_swapchain_texture,
         NULL, NULL
     );
 
     SDL_GPUColorTargetInfo t_info = {
-        .texture = swapchain_texture,
+        .texture = _swapchain_texture,
         .clear_color = {0.831373f, 1.0f, 0.972549f, 1.0f},
         .load_op = SDL_GPU_LOADOP_CLEAR,
         .store_op = SDL_GPU_STOREOP_STORE,

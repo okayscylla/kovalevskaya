@@ -2,6 +2,7 @@
 
 #include <SDL3/SDL.h>
 #include <iostream>
+#include <cstdint>
 
 
 void KovWindow::init(int w, int h, std::string title, int t_fpss) {
@@ -49,7 +50,8 @@ void KovWindow::resize(int w, int h) {
 }
 
 void KovWindow::setTargetFPS(int fps) {
-    _target_ft = SDL_SECONDS_TO_NS((uint64_t)(1 / 480));
+    _target_ft = 1000000000LL / fps;
+    log(std::format("target frametime {}", _target_ft));
 }
 
 void KovWindow::poll() {

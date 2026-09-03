@@ -7,7 +7,7 @@
 
 class KovWindow {
     public:
-    void virtual init(int w = 1080, int h = 720, std::string title = "KovWindow", int t_fps = 48000);
+    void virtual init(int w = 1080, int h = 720, std::string title = "KovWindow", int t_fps = 480);
     void setTitle(std::string title);
     void resize(int w, int h);
     void setTargetFPS(int fps);

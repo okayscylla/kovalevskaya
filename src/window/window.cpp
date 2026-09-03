@@ -101,18 +101,21 @@ void KovWindow::gracefulExit() {
 void KovWindow::exit() { _quit = true; }
 
 void KovWindow::mainloop() {
-    while (!_quit) {
-        uint64_t f_start = SDL_GetTicksNS();
+    uint64_t f_end, f_deadline;
 
+    f_deadline = SDL_GetTicksNS() + _target_ft;
+
+    while (!_quit) {
         poll();
         draw();
 
-        uint64_t f_end = SDL_GetTicksNS();
-        _real_ft = f_end - f_start;
+        f_end = SDL_GetTicksNS();
 
-        if (_real_ft < _target_ft) {
-            SDL_DelayNS(_target_ft - _real_ft);
+        if (f_end < f_deadline) {
+            SDL_DelayNS(f_deadline - f_end);
         }
+
+        f_deadline += _target_ft;
     }
 }
 

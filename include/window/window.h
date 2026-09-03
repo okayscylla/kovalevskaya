@@ -34,7 +34,7 @@ class KovWindow {
 
     private:
     bool _quit = false;
-    uint64_t _target_ft, _real_ft;
+    uint64_t _target_ft;
 
     SDL_GPUShaderFormat _sdlsfmts;
     SDL_GPUTextureCreateInfo _sdlgputinfo;

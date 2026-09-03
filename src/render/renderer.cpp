@@ -10,12 +10,10 @@ void Renderer::init(SDL_GPUDevice* gpu, SDL_Window* window, int w, int h) {
 void Renderer::cleanup() { return; }
 
 void Renderer::draw() {
-    SDL_GPUCommandBuffer* _cmdbuf;
-    _cmdbuf = SDL_AcquireGPUCommandBuffer(_hdlgpu);
+    _hdlcmdbuf = SDL_AcquireGPUCommandBuffer(_hdlgpu);
 
-    SDL_GPUTexture* _swapchain_texture;
     SDL_WaitAndAcquireGPUSwapchainTexture(
-        _cmdbuf, _hdlwindow,
+        _hdlcmdbuf, _hdlwindow,
         &_swapchain_texture,
         NULL, NULL
     );
@@ -29,8 +27,8 @@ void Renderer::draw() {
     };
 
     SDL_GPURenderPass* _rpass;
-    _rpass = SDL_BeginGPURenderPass(_cmdbuf, &t_info, 1, NULL);
+    _rpass = SDL_BeginGPURenderPass(_hdlcmdbuf, &t_info, 1, NULL);
     SDL_EndGPURenderPass(_rpass);
 
-    SDL_SubmitGPUCommandBuffer(_cmdbuf);
+    SDL_SubmitGPUCommandBuffer(_hdlcmdbuf);
 }

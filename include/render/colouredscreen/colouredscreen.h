@@ -4,5 +4,7 @@
 
 
 class ColouredScreen : public Renderer {
-
+    public:
+    void draw();
+    void writePixel(int x, int y);
 };

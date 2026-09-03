@@ -113,6 +113,8 @@ void KovWindow::mainloop() {
 
         if (f_end < f_deadline) {
             SDL_DelayNS(f_deadline - f_end);
+        } else {
+            f_deadline = SDL_GetTicksNS();
         }
 
         f_deadline += _target_ft;

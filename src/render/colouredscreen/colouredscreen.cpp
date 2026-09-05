@@ -82,5 +82,5 @@ void ColouredScreen::cleanup() {
 }
 
 void ColouredScreen::writePixel(int x, int y, uint32_t value) {
-    
+
 }

@@ -5,6 +5,7 @@
 #include <SDL3/SDL.h>
 #include <string>
 
+
 class KovWindow {
     public:
     void virtual init(int w = 1080, int h = 720, std::string title = "KovWindow", int t_fps = 480);

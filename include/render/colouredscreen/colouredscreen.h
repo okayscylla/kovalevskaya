@@ -7,6 +7,8 @@
 
 class ColouredScreen : public Renderer {
     public:
+    const int id = 1; // FIXME: idk inheritance shit
+
     void init(SDL_GPUDevice* gpu, SDL_Window* window, int w, int h);
     void draw();
     void cleanup();

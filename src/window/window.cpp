@@ -1,5 +1,7 @@
 #include "window/window.h"
 
+#include "render/colouredscreen/colouredscreen.h"
+
 #include <SDL3/SDL.h>
 #include <iostream>
 #include <cstdint>
@@ -13,12 +15,14 @@ void KovWindow::init(int w, int h, std::string title, int t_fpss) {
     _sdlwindow = SDL_CreateWindow(title.c_str(), width, height, 0);
 
     _sdlsfmts = SDL_GPU_SHADERFORMAT_MSL | SDL_GPU_SHADERFORMAT_SPIRV | SDL_GPU_SHADERFORMAT_DXIL | SDL_GPU_SHADERFORMAT_MSL;
+    log(std::format("using shaderformat {}", _sdlsfmts));
 
     _sdlhgpu = SDL_CreateGPUDevice(
         _sdlsfmts,
         false,
         NULL
     );
+    log("bound to gpu device");
 
     SDL_ClaimWindowForGPUDevice(_sdlhgpu, _sdlwindow);
     SDL_SetGPUSwapchainParameters(
@@ -30,15 +34,16 @@ void KovWindow::init(int w, int h, std::string title, int t_fpss) {
 
     setTargetFPS(t_fpss);
 
-    setRenderer(new Renderer);
+    setRenderer(new ColouredScreen);
 
-    kb_state = SDL_GetKeyboardState(NULL);
+    kb_state = SDL_GetKeyboardState(NULL); // FIXME: is this even necessary?
 }
 
 void KovWindow::setTitle(std::string title) {
     window_title = title;
 
     SDL_SetWindowTitle(_sdlwindow, window_title.c_str());
+    log(std::format("new title {}", title));
 }
 
 void KovWindow::resize(int w, int h) {
@@ -47,6 +52,7 @@ void KovWindow::resize(int w, int h) {
     SDL_SetWindowSize(_sdlwindow, width, height);
 
     renderer->init(_sdlhgpu, _sdlwindow, width, height);
+    log(std::format("new resolution {}x{}", w, h));
 }
 
 void KovWindow::setTargetFPS(int fps) {
@@ -68,11 +74,13 @@ void KovWindow::poll() {
 void KovWindow::setRenderer(Renderer* new_renderer) {
     if (renderer != nullptr) {
         renderer->cleanup();
+        log(std::format("destroyed renderer id {}", renderer->id));
         delete renderer;
     }
 
     renderer = new_renderer;
     renderer->init(_sdlhgpu, _sdlwindow, width, height);
+    log(std::format("using new renderer id {}", renderer->id));
 }
 
 void KovWindow::draw() {
@@ -84,6 +92,7 @@ void KovWindow::draw() {
 void KovWindow::gracefulExit() {
     if (renderer != nullptr) {
         renderer->cleanup();
+        log(std::format("destroyed renderer id {}", renderer->id));
         delete renderer;
     }
 
@@ -94,6 +103,8 @@ void KovWindow::gracefulExit() {
     SDL_Quit();
     
     delete _sdlevent;
+
+    log("cleanup finished, exiting");
 
     _quit = true;
 }

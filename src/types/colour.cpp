@@ -2,6 +2,8 @@
 
 #include "utils/macros.h"
 
+#include <cmath>
+
 
 Color Color::operator+(const Color operand) const {
     return Color(red + operand.red, green + operand.green, blue + operand.blue);

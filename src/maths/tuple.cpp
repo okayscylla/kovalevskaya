@@ -2,6 +2,8 @@
 
 #include "utils/macros.h"
 
+#include <cmath>
+
 
 Tuple4 Tuple4::operator+(const Tuple4 operand) const {
     return Tuple4(x + operand.x, y + operand.y, z + operand.z, w + operand.w);

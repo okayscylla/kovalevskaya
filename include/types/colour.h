@@ -1,32 +1,34 @@
 #pragma once
 
+#include <cstdint>
 
-class Color {
+
+class Colour {
     public:
     float red, green, blue;
 
-    Color operator+(const Color operand) const;
-    Color operator-(const Color operand) const;
-    Color& operator+=(const Color operand);
-    Color& operator-=(const Color operand);
+    Colour operator+(const Colour operand) const;
+    Colour operator-(const Colour operand) const;
+    Colour& operator+=(const Colour operand);
+    Colour& operator-=(const Colour operand);
     
-    Color operator*(const double scalar) const;
-    Color operator/(const double scalar) const;
-    Color& operator*=(const double scalar);
-    Color& operator/=(const double scalar);
+    Colour operator*(const double scalar) const;
+    Colour operator/(const double scalar) const;
+    Colour& operator*=(const double scalar);
+    Colour& operator/=(const double scalar);
 
-    Color operator*(const Color operand) const;
-    Color& operator*=(const Color operand);
+    Colour operator*(const Colour operand) const; // hadamard product
+    Colour& operator*=(const Colour operand); // hadamard produca
 
-    bool operator==(const Color operand) const;
-    bool operator!=(const Color operand) const;
+    bool operator==(const Colour operand) const;
+    bool operator!=(const Colour operand) const;
 
-    Color negate() const;
+    Colour negate() const;
 
     float magnitude() const;
-    Color& normalise();
+    Colour& normalise();
 
-    
+    uint32_t toInt() const;
 
-    Color(float _red, float _green, float _blue) : red(_red), green(_green), blue(_blue) {}
+    Colour(float _red, float _green, float _blue) : red(_red), green(_green), blue(_blue) {}
 };

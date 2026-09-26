@@ -5,8 +5,6 @@
 
 class Renderer {
     public:
-    const int id = 0;
-
     void virtual init(SDL_GPUDevice* gpu, SDL_Window* window, int w, int h);
     void virtual cleanup();
 

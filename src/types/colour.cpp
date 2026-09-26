@@ -5,16 +5,16 @@
 #include <cmath>
 
 
-Color Color::operator+(const Color operand) const {
-    return Color(red + operand.red, green + operand.green, blue + operand.blue);
+Colour Colour::operator+(const Colour operand) const {
+    return Colour(red + operand.red, green + operand.green, blue + operand.blue);
 }
 
-Color Color::operator-(const Color operand) const {
-    return Color(red - operand.red, green - operand.green, blue - operand.blue);
+Colour Colour::operator-(const Colour operand) const {
+    return Colour(red - operand.red, green - operand.green, blue - operand.blue);
 
 }
 
-Color& Color::operator+=(const Color operand) {
+Colour& Colour::operator+=(const Colour operand) {
     red += operand.red;
     green += operand.green;
     blue += operand.blue;
@@ -22,7 +22,7 @@ Color& Color::operator+=(const Color operand) {
     return *this;
 }
 
-Color& Color::operator-=(const Color operand) {
+Colour& Colour::operator-=(const Colour operand) {
     red -= operand.red;
     green -= operand.green;
     blue -= operand.blue;
@@ -30,19 +30,19 @@ Color& Color::operator-=(const Color operand) {
     return *this;
 }
 
-Color Color::operator*(const double scalar) const {
-    return Color(red * scalar, green * scalar, blue * scalar);
+Colour Colour::operator*(const double scalar) const {
+    return Colour(red * scalar, green * scalar, blue * scalar);
 }
 
-Color Color::operator/(const double scalar) const {
+Colour Colour::operator/(const double scalar) const {
     if (notZero(scalar)) { 
-        return Color(red / scalar, green / scalar, blue / scalar);
+        return Colour(red / scalar, green / scalar, blue / scalar);
     } else {
-        return Color(0, 0, 0);
+        return Colour(0, 0, 0);
     }
 }
 
-Color& Color::operator*=(const double scalar) {
+Colour& Colour::operator*=(const double scalar) {
     red *= scalar;
     green *= scalar;
     blue *= scalar;
@@ -50,7 +50,7 @@ Color& Color::operator*=(const double scalar) {
     return *this;
 }
 
-Color& Color::operator/=(const double scalar) {
+Colour& Colour::operator/=(const double scalar) {
     if (notZero(scalar)) {
         red /= scalar;
         green /= scalar;
@@ -64,11 +64,11 @@ Color& Color::operator/=(const double scalar) {
     return *this;
 }
 
-Color Color::operator*(const Color operand) const { // hadamard product
-    return Color(red * operand.red, green * operand.green, blue * operand.blue);
+Colour Colour::operator*(const Colour operand) const { // hadamard product
+    return Colour(red * operand.red, green * operand.green, blue * operand.blue);
 }
 
-Color& Color::operator*=(const Color operand) { // hadamard product
+Colour& Colour::operator*=(const Colour operand) { // hadamard product
     red *= operand.red;
     green *= operand.green;
     blue *= operand.blue;
@@ -76,23 +76,23 @@ Color& Color::operator*=(const Color operand) { // hadamard product
     return *this;
 }
 
-bool Color::operator==(const Color operand) const {
+bool Colour::operator==(const Colour operand) const {
     return (assertEqual(red, operand.red) && assertEqual(green, operand.green) && assertEqual(blue, operand.blue));
 }
 
-bool Color::operator!=(const Color operand) const {
+bool Colour::operator!=(const Colour operand) const {
     return !(assertEqual(red, operand.red) && assertEqual(green, operand.green) && assertEqual(blue, operand.blue));
 }
 
-Color Color::negate() const {
-    return Color(-red, -green, blue);
+Colour Colour::negate() const {
+    return Colour(-red, -green, blue);
 }
 
-float Color::magnitude() const {
+float Colour::magnitude() const {
     return std::sqrtf(red*red + green*green + blue*blue);
 }
 
-Color& Color::normalise() {
+Colour& Colour::normalise() {
     float m = magnitude();
 
     if (notZero(m)) {
@@ -102,4 +102,13 @@ Color& Color::normalise() {
     }
 
     return *this;
+}
+
+uint32_t Colour::toInt() const {
+    return (
+        ((uint32_t)0xFF000000) &
+        ((uint32_t)std::round(blue * 255) << 4) &
+        ((uint32_t)std::round(green * 255) << 2) &
+        ((uint32_t)std::round(red * 255))
+    );
 }

@@ -74,13 +74,13 @@ void KovWindow::poll() {
 void KovWindow::setRenderer(Renderer* new_renderer) {
     if (renderer != nullptr) {
         renderer->cleanup();
-        log(std::format("destroyed renderer id {}", renderer->id));
+        log("destroyed renderer");
         delete renderer;
     }
 
     renderer = new_renderer;
     renderer->init(_sdlhgpu, _sdlwindow, width, height);
-    log(std::format("using new renderer id {}", renderer->id));
+    log("created new renderer");
 }
 
 void KovWindow::draw() {
@@ -92,7 +92,7 @@ void KovWindow::draw() {
 void KovWindow::gracefulExit() {
     if (renderer != nullptr) {
         renderer->cleanup();
-        log(std::format("destroyed renderer id {}", renderer->id));
+        log("destroyed renderer");;
         delete renderer;
     }
 

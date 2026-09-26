@@ -59,8 +59,12 @@ void ColouredScreen::draw() {
         &_g_swapchain_texture,
         NULL, NULL
     );
-
-    writePixel(500, 500, Colour(1,1,1).toInt()); // A B G R
+    
+    for (int i=0; i < width; i++) {
+        for (int j=0; j < width; j++) {
+            writePixel(j, i, Colour((float)i / height, (float)j / width, 1).toInt());
+        }
+    }
 
     void* _g_tbloc = SDL_MapGPUTransferBuffer(_hdlgpu, _g_tbhdl, true);
 
@@ -76,7 +80,7 @@ void ColouredScreen::draw() {
 
     SDL_GPUColorTargetInfo _g_t_info = {
         .texture = _g_swapchain_texture,
-        .clear_color = {0.831373f, 1.0f, 0.972549f, 1.0f},
+        .clear_color = {0.f, 0.f, 0.f, 0.f},
         .load_op = SDL_GPU_LOADOP_CLEAR,
         .store_op = SDL_GPU_STOREOP_STORE,
         .cycle = true
@@ -107,6 +111,8 @@ void ColouredScreen::draw() {
 
 void ColouredScreen::cleanup() {
     SDL_ReleaseGPUTexture(_hdlgpu, _g_imthdl);
+
+    free(pix_buf);
 }
 
 void ColouredScreen::writePixel(int x, int y, uint32_t value) {

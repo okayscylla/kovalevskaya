@@ -107,9 +107,9 @@ Colour& Colour::normalise() {
 
 uint32_t Colour::toInt() const {
     return (
-        ((uint32_t)0xFF000000) &
-        ((uint32_t)std::round(blue * 255) << 4) &
-        ((uint32_t)std::round(green * 255) << 2) &
+        ((uint32_t)0xFF000000) ^
+        ((uint32_t)std::round(blue * 255) << 16) ^
+        ((uint32_t)std::round(green * 255) << 8) ^
         ((uint32_t)std::round(red * 255))
     );
 }

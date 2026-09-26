@@ -2,6 +2,7 @@
 
 #include "utils/macros.h"
 #include "types/colour.h"
+#include "maths/constants.h"
 
 #include <cmath>
 

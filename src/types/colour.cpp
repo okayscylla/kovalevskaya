@@ -1,6 +1,7 @@
 #include "types/colour.h"
 
 #include "utils/macros.h"
+#include "maths/constants.h"
 
 #include <cmath>
 

@@ -8,10 +8,9 @@
 class ColouredScreen : public Renderer {
     public:
     void init(SDL_GPUDevice* gpu, SDL_Window* window, int w, int h);
-    void draw();
     void cleanup();
 
-    ~ColouredScreen() { cleanup(); }
+    void draw();
 
     private:
     void writePixel(int x, int y, uint32_t value);

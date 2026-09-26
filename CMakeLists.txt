@@ -21,7 +21,7 @@ endif()
 
 find_package(doctest REQUIRED)
 
-file(GLOB TESTING_SOURCES "src/maths/*.cpp" "src/types/*.cpp" "src/util/*.cpp" "tests/*.cpp")
+file(GLOB TESTING_SOURCES "src/maths/*.cpp" "src/types/*.cpp" "src/util/*.cpp" "tests/*.cpp" "tests/misc/base.h")
 add_executable(kovalevskaya_test ${TESTING_SOURCES})
 target_include_directories(kovalevskaya_test PRIVATE "include")
 

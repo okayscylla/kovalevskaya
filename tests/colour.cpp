@@ -1,10 +1,6 @@
-#include <doctest/doctest.h>
+#include "misc/base.h"
 
-#include "utils/macros.h"
 #include "types/colour.h"
-#include "maths/constants.h"
-
-#include <cmath>
 
 
 TEST_CASE("colors have red, green, and blue components") {

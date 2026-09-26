@@ -1,11 +1,6 @@
-#include <doctest/doctest.h>
+#include "misc/base.h"
 
-#include "utils/macros.h"
-#include "maths/constants.h"
 #include "maths/tuple.h"
-
-#include <cmath>
-#include <typeinfo>
 
 
 TEST_CASE("tuple4 with w=1.0 is a point") {

@@ -16,3 +16,15 @@ if (UNIX)
 elseif (WIN32)
     target_link_libraries(kovalevskaya PRIVATE SDL3::SDL3)
 endif()
+
+find_package(doctest REQUIRED)
+
+file(GLOB TESTING_SOURCES "src/maths/*.cpp" "src/types/*.cpp" "src/util/*.cpp" "tests/*.cpp")
+add_executable(kovalevskaya_test ${TESTING_SOURCES})
+target_include_directories(kovalevskaya_test PRIVATE "include")
+
+if (UNIX)
+    target_link_libraries(kovalevskaya_test PRIVATE doctest::doctest)
+elseif (WIN32)
+    target_link_libraries(kovalevskaya_test PRIVATE doctest::doctest)
+endif()

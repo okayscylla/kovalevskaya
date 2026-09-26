@@ -11,6 +11,8 @@ class ColouredScreen : public Renderer {
     void draw();
     void cleanup();
 
+    ~ColouredScreen() { cleanup(); }
+
     private:
     void writePixel(int x, int y, uint32_t value);
 

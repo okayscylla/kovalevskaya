@@ -36,7 +36,6 @@ class KovWindow {
     uint64_t _target_ft;
 
     SDL_GPUShaderFormat _sdlsfmts;
-    SDL_GPUTextureCreateInfo _sdlgputinfo;
 
     SDL_Event* _sdlevent = new SDL_Event;
     SDL_Window* _sdlwindow;

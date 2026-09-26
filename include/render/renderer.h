@@ -10,6 +10,8 @@ class Renderer {
 
     void virtual draw();
 
+    virtual ~Renderer() { cleanup(); }
+
     protected:
     int width, height;
     SDL_GPUDevice* _hdlgpu;

@@ -137,7 +137,6 @@ Tuple3 Tuple3::operator+(const Tuple3 operand) const {
 
 Tuple3 Tuple3::operator-(const Tuple3 operand) const {
     return Tuple3(x - operand.x, y - operand.y, z - operand.z);
-
 }
 
 Tuple3& Tuple3::operator+=(const Tuple3 operand) {

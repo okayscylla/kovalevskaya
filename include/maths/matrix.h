@@ -37,8 +37,7 @@ class Mat3 {
     Mat3 operator*(const Mat3 operand) const;
     Mat3& operator*=(const Mat3 operand);
 
-    Mat3 operator*(const Tuple3 operand) const;
-    Mat3& operator*=(const Tuple3 operand);
+    Tuple3 operator*(const Tuple3 operand) const;
 
     Mat3(std::array<float, 9> val) : _arr(val) {}
     Mat3() : _arr({
@@ -62,8 +61,7 @@ class Mat4 {
     Mat4 operator*(const Mat4 operand) const;
     Mat4& operator*=(const Mat4 operand);
 
-    Mat4 operator*(const Tuple4 operand) const;
-    Mat4& operator*=(const Tuple4 operand);
+    Tuple4 operator*(const Tuple4 operand) const;
 
     Mat4(std::array<float, 16> val) : _arr(val) {}
     Mat4() : _arr({

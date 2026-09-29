@@ -158,3 +158,15 @@ TEST_CASE("multiplying two mat4s") { // TODO: make test for Mat3
         16,26,46,42
     }));
 }
+
+TEST_CASE("multiplying a mat4 by a tuple4") { // TODO: make test for Mat3
+    Mat4 a = Mat4({
+        1,2,3,4,
+        2,4,4,2,
+        8,6,4,1,
+        0,0,0,1
+    });
+    Tuple4 b = Tuple4(1, 2, 3, 1);
+
+    CHECK(a * b == Tuple4(18, 24, 33, 1));
+}

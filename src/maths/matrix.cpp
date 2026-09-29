@@ -83,12 +83,26 @@ Mat3& Mat3::operator*=(const Mat3 operand) {
     return *this;
 }
 
-Mat3 Mat3::operator*(const Tuple3 operand) const {
+Tuple3 Mat3::operator*(const Tuple3 operand) const {
+    Tuple3 v;
 
-}
+    v.x = (
+        _arr[0] * operand.x +
+        _arr[1] * operand.y +
+        _arr[2] * operand.z
+    );
+    v.y = (
+        _arr[4] * operand.x +
+        _arr[5] * operand.y +
+        _arr[6] * operand.z
+    );
+    v.z = (
+        _arr[8] * operand.x +
+        _arr[9] * operand.y +
+        _arr[10] * operand.z
+    );
 
-Mat3& Mat3::operator*=(const Tuple3 operand) {
-
+    return v;
 }
 
 const float* Mat4::operator[](const int r) const { return &_arr[r * 4]; }
@@ -135,10 +149,33 @@ Mat4& Mat4::operator*=(const Mat4 operand) {
     return *this;
 }
 
-Mat4 Mat4::operator*(const Tuple4 operand) const {
+Tuple4 Mat4::operator*(const Tuple4 operand) const {
+    Tuple4 v;
 
-}
+    v.x = (
+        _arr[0] * operand.x +
+        _arr[1] * operand.y +
+        _arr[2] * operand.z +
+        _arr[3] * operand.w
+    );
+    v.y = (
+        _arr[4] * operand.x +
+        _arr[5] * operand.y +
+        _arr[6] * operand.z +
+        _arr[7] * operand.w
+    );
+    v.z = (
+        _arr[8] * operand.x +
+        _arr[9] * operand.y +
+        _arr[10] * operand.z +
+        _arr[11] * operand.w
+    );
+    v.w = (
+        _arr[12] * operand.x +
+        _arr[13] * operand.y +
+        _arr[14] * operand.z +
+        _arr[15] * operand.w
+    );
 
-Mat4& Mat4::operator*=(const Tuple4 operand) {
-
+    return v;
 }

@@ -105,6 +105,20 @@ Tuple3 Mat3::operator*(const Tuple3 operand) const {
     return v;
 }
 
+Mat3& Mat3::transpose() { // TODO: optimise this (do this inplace)
+    std::array<float, 9> v;
+
+    for (int r=0; r < 3; r++) {
+        for (int c=0; c < 3; c++) {
+            v[r * 3 + c] = _arr[c * 3 + r];
+        }
+    }
+
+    _arr = v;
+
+    return *this;
+}
+
 const float* Mat4::operator[](const int r) const { return &_arr[r * 4]; }
 
 float* Mat4::operator[](const int r) { return &_arr[r * 4]; }
@@ -178,4 +192,18 @@ Tuple4 Mat4::operator*(const Tuple4 operand) const {
     );
 
     return v;
+}
+
+Mat4& Mat4::transpose() { // TODO: optimise this (do this inplace)
+    std::array<float, 16> v;
+
+    for (int r=0; r < 4; r++) {
+        for (int c=0; c < 4; c++) {
+            v[r * 4 + c] = _arr[c * 4 + r];
+        }
+    }
+
+    _arr = v;
+
+    return *this;
 }

@@ -150,13 +150,14 @@ TEST_CASE("multiplying two mat4s") { // TODO: make test for Mat3
         4,3,6,5,
         1,2,7,8
     });
-
-    CHECK(a * b == Mat4({
+    Mat4 c = Mat4({
         20,22,50,48,
         44,54,114,108,
         40,58,110,102,
         16,26,46,42
-    }));
+    });
+
+    CHECK(a * b == c);
 }
 
 TEST_CASE("multiplying a mat4 by a tuple4") { // TODO: make test for Mat3
@@ -171,7 +172,7 @@ TEST_CASE("multiplying a mat4 by a tuple4") { // TODO: make test for Mat3
     CHECK(a * b == Tuple4(18, 24, 33, 1));
 }
 
-TEST_CASE("multiplying a mat4 by an identity matrix") {
+TEST_CASE("multiplying a mat4 by an identity matrix") { // TODO: make test for Mat3, Mat2
     Mat4 a = Mat4({
         1,2,3,4,
         2,4,4,2,
@@ -181,4 +182,21 @@ TEST_CASE("multiplying a mat4 by an identity matrix") {
     Mat4 b;
 
     CHECK(a * b == a);
+}
+
+TEST_CASE("transposing a mat4") { // TODO: make test for Mat3, Mat2
+    Mat4 a = Mat4({
+        0,9,3,0,
+        9,8,0,8,
+        1,8,5,3,
+        0,0,5,8
+    });
+    Mat4 b = Mat4({
+        0,9,1,0,
+        9,8,8,0,
+        3,0,5,5,
+        0,8,3,8
+    });
+
+    CHECK(a.transpose() == b);
 }

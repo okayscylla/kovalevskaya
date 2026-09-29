@@ -5,7 +5,7 @@
 #include <array>
 
 
-class Mat2 {
+class Mat2 { // TODO: add multiplication by tuples to Mat2
     public:
     const float* operator[](const int r) const;
     float* operator[](const int r);
@@ -14,7 +14,11 @@ class Mat2 {
     bool operator!=(const Mat2 operand) const;
 
     Mat2 operator*(const Mat2 operand) const;
-    Mat2& operator*=(const Mat2 operand); // TODO: implement Tuple2 and add multiplication by tuples to Mat2
+    Mat2& operator*=(const Mat2 operand);
+
+    Mat2& transpose(); // TODO: implement this
+
+    float determinant() const;
 
     Mat2(std::array<float, 4> val) : _arr(val) {}
     Mat2() : _arr({
@@ -39,6 +43,10 @@ class Mat3 {
 
     Tuple3 operator*(const Tuple3 operand) const;
 
+    Mat3& transpose();
+
+    float determinant() const;
+
     Mat3(std::array<float, 9> val) : _arr(val) {}
     Mat3() : _arr({
         1,0,0,
@@ -62,6 +70,10 @@ class Mat4 {
     Mat4& operator*=(const Mat4 operand);
 
     Tuple4 operator*(const Tuple4 operand) const;
+
+    Mat4& transpose();
+
+    float determinant() const;
 
     Mat4(std::array<float, 16> val) : _arr(val) {}
     Mat4() : _arr({

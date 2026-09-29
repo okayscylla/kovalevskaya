@@ -170,3 +170,15 @@ TEST_CASE("multiplying a mat4 by a tuple4") { // TODO: make test for Mat3
 
     CHECK(a * b == Tuple4(18, 24, 33, 1));
 }
+
+TEST_CASE("multiplying a mat4 by an identity matrix") {
+    Mat4 a = Mat4({
+        1,2,3,4,
+        2,4,4,2,
+        8,6,4,1,
+        0,0,0,1
+    });
+    Mat4 b;
+
+    CHECK(a * b == a);
+}

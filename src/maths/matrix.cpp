@@ -316,6 +316,11 @@ Mat4& Mat4::transpose() { // TODO: optimise this (do this inplace)
 Mat4 Mat4::inverse() const {
     Mat4 v;
 
+    if (!invertible()) {
+        v._arr = _arr;
+        return v; // fail quietly, maybe a bad idea?
+    }
+
     for (int r=0; r < 4; r++) {
         for (int c=0; c < 4; c++) {
             v[c][r] = cofactor(r, c) / determinant();

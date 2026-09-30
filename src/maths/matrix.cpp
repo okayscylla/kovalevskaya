@@ -390,5 +390,5 @@ float Mat4::cofactor(int r, int c) const {
 }
 
 bool Mat4::invertible() const {
-    return (determinant() != 0);
+    return (notZero(determinant()));
 }

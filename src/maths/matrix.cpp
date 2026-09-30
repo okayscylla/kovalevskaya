@@ -3,8 +3,6 @@
 #include "maths/constants.h"
 #include "utils/macros.h"
 
-#include <cmath>
-
 
 const float* Mat2::operator[](const int r) const {
     return &_arr[r * 2];

@@ -3,6 +3,7 @@
 #include "maths/tuple.h"
 
 #include <array>
+#include <cmath>
 
 
 class Mat2 { // TODO: add multiplication by tuples to Mat2
@@ -96,3 +97,7 @@ class Mat4 {
     private:
     std::array<float, 16> _arr; // row, col
 };
+
+#define Translation(x, y, z)    Mat4({1,0,0,x,0,1,0,y,0,0,1,z,0,0,0,1})
+#define Scaling(x, y, z)        Mat4({x,0,0,0,0,y,0,0,0,0,z,0,0,0,0,1})
+#define Rotation(r)             Mat4({1,0,0,0,0,std::cos(r),-(std::sin(r),0,0,std::sin(r),std::cos(r),0,0,0,0,1)}) // TODO: implement scaling around arbitary line

@@ -98,6 +98,6 @@ class Mat4 {
     std::array<float, 16> _arr; // row, col
 };
 
-#define Translation(x, y, z)    Mat4({1,0,0,x,0,1,0,y,0,0,1,z,0,0,0,1})
-#define Scaling(x, y, z)        Mat4({x,0,0,0,0,y,0,0,0,0,z,0,0,0,0,1})
-#define Rotation(r)             Mat4({1,0,0,0,0,std::cos(r),-(std::sin(r),0,0,std::sin(r),std::cos(r),0,0,0,0,1)}) // TODO: implement scaling around arbitary line
+#define Translate(x, y, z)    Mat4({1,0,0,x,0,1,0,y,0,0,1,z,0,0,0,1})
+#define Scale(x, y, z)        Mat4({x,0,0,0,0,y,0,0,0,0,z,0,0,0,0,1})
+#define RotateX(r)            Mat4({1,0,0,0,0,std::cosf(r),-(std::sinf(r)),0,0,std::sinf(r),std::cosf(r),0,0,0,0,1}) // TODO: implement scaling around arbitary line

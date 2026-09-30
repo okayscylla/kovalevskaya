@@ -16,7 +16,7 @@ class Mat2 { // TODO: add multiplication by tuples to Mat2
     Mat2 operator*(const Mat2 operand) const;
     Mat2& operator*=(const Mat2 operand);
 
-    Mat2& transpose(); // TODO: implement this
+    Mat2& transpose();
 
     float determinant() const;
 
@@ -44,8 +44,11 @@ class Mat3 {
     Tuple3 operator*(const Tuple3 operand) const;
 
     Mat3& transpose();
+    Mat2 submatrix(int r, int c) const;
 
     float determinant() const;
+    float minor(int r, int c) const;
+    float cofactor(int r, int c) const;
 
     Mat3(std::array<float, 9> val) : _arr(val) {}
     Mat3() : _arr({
@@ -72,8 +75,15 @@ class Mat4 {
     Tuple4 operator*(const Tuple4 operand) const;
 
     Mat4& transpose();
+    Mat4 inverse() const; // TODO: implement inverse of Mat3, Mat2
+    Mat4& invert();
+    Mat3 submatrix(int r, int c) const;
 
     float determinant() const;
+    float minor(int r, int c) const;
+    float cofactor(int r, int c) const;
+
+    bool invertible() const;
 
     Mat4(std::array<float, 16> val) : _arr(val) {}
     Mat4() : _arr({

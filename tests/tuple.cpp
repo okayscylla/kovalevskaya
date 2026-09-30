@@ -190,7 +190,7 @@ TEST_CASE("computing the magnitude a tuple3") {
     CHECK(assertEqual(a.magnitude(), std::sqrtf(14)));
 }
 
-TEST_CASE("calculating unit vector of tuple3") {
+TEST_CASE("unit vector of tuple3") {
     Tuple3 a = Tuple3(4, 0, 0);
     Tuple3 b = a.unitVector();
 

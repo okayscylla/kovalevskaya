@@ -60,7 +60,7 @@ void ColouredScreen::draw() {
         NULL, NULL
     );
     
-    for (int i=0; i < width; i++) {
+    for (int i=0; i < height; i++) {
         for (int j=0; j < width; j++) {
             writePixel(j, i, Colour((float)i / height, (float)j / width, 1).toInt());
         }

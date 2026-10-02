@@ -1,6 +1,7 @@
 #include "misc/base.h"
 
 #include "maths/matrix.h"
+#include <cmath>
 
 
 TEST_CASE("multiplying by a transformation matrix") {
@@ -65,5 +66,23 @@ TEST_CASE("the inverse of the thingy rotates it the other way") {
     Tuple4 a = Point(0, 1, 0);
     Mat4 b = RotateX(PI / 4).invert(); // -45 (methinks) degrees
 
-    CHECK(b * a == Point(0, (std::sqrtf(2) / 2), -(std::sqrtf(2) / 2))); // yay unit circle !!
+    CHECK(b * a == Point(0, std::sqrtf(2) / 2, -(std::sqrtf(2) / 2))); // yay unit circle !!
+}
+
+TEST_CASE("rotating a point around the y-axis") {
+    Tuple4 a = Point(0, 0, 1);
+    Mat4 b = RotateY(PI / 4); // 45 degrees
+    Mat4 c = RotateY(PI / 2); // 90 degrees
+
+    CHECK(b * a == Point(std::sqrtf(2) / 2, 0, std::sqrtf(2) / 2)); // yay unit circle !!
+    CHECK(c * a == Point(1, 0, 0));
+}
+
+TEST_CASE("rotating a point around the z-axis") {
+    Tuple4 a = Point(0, 1, 0);
+    Mat4 b = RotateZ(PI / 4); // 45 degrees
+    Mat4 c = RotateZ(PI / 2); // 90 degrees
+
+    CHECK(b * a == Point(-(std::sqrtf(2) / 2), std::sqrtf(2) / 2, 0)); // yay unit circle !!
+    CHECK(c * a == Point(-1, 0, 0));
 }

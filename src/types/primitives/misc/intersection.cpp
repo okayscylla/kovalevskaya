@@ -1,5 +1,7 @@
 #include "types/primitives/misc/intersection.h"
 
+#include <iterator>
+
 
 IntersectionArray IntersectionArray::operator+(const IntersectionArray operand) const {
     IntersectionArray v = IntersectionArray(intersections);

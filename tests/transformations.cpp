@@ -86,3 +86,10 @@ TEST_CASE("rotating a point around the z-axis") {
     CHECK(b * a == Point(-(std::sqrtf(2) / 2), std::sqrtf(2) / 2, 0)); // yay unit circle !!
     CHECK(c * a == Point(-1, 0, 0));
 }
+
+TEST_CASE("shearing x in proportion to y") { // TODO: implement more tests?
+    Tuple4 a = Point(2, 3, 4);
+    Mat4 b = Shear(1, 0, 0, 0, 0, 0);
+
+    CHECK(b * a == Point(5, 3, 4));
+}

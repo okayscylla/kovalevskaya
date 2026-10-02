@@ -1,4 +1,4 @@
-#include "types/colour.h"
+#include "types/basic/colour.h"
 
 #include "utils/macros.h"
 #include "maths/constants.h"

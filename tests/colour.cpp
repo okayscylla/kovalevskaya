@@ -1,6 +1,6 @@
 #include "misc/base.h"
 
-#include "types/colour.h"
+#include "types/basic/colour.h"
 
 
 TEST_CASE("colors have red, green, and blue components") {

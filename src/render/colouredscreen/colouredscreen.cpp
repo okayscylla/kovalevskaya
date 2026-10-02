@@ -1,6 +1,6 @@
 #include "render/colouredscreen/colouredscreen.h"
 
-#include "types/colour.h"
+#include "types/basic/colour.h"
 
 #include <cstdlib>
 

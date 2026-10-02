@@ -16,7 +16,7 @@ IntersectionArray Sphere::intersect(Ray r) const {
     float discriminant = b*b - (4 * a * c);
 
     if (discriminant < (-EPSILON)) {
-        return IntersectionArray({});
+        return IntersectionArray();
     }
 
     Intersection t1 = Intersection(((-0.5f * (b - (std::sqrtf(discriminant)))) / a), this);

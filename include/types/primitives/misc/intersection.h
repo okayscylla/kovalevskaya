@@ -15,13 +15,17 @@ struct Intersection {
 
 struct IntersectionArray {
     public:
-    const Intersection operator[](int i) const;
+    IntersectionArray operator+(const IntersectionArray operand) const;
+    IntersectionArray& operator+=(const IntersectionArray operand);
+
+    const Intersection operator[](const int i) const;
 
     int size() const;
     IntersectionArray append(const Intersection intersection);
     const Intersection findHit() const;
 
     IntersectionArray(std::vector<Intersection> _intersections) : intersections(_intersections) {}
+    IntersectionArray() : intersections({}) {}
 
     private:
     std::vector<Intersection> intersections;

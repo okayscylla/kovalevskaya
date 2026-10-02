@@ -5,7 +5,7 @@
 
 class Primitive; // forward declartion scawy
 
-struct Intersection {
+struct Intersection { // TODO: add ==, !=, etcetera operators
     public:
     const float t;
     const Primitive* object;
@@ -13,7 +13,7 @@ struct Intersection {
     Intersection(float _t, const Primitive* _object) : t(_t), object(_object) {}
 };
 
-struct IntersectionArray {
+struct IntersectionArray { // TODO: add ==, !=, etcetera operators
     public:
     IntersectionArray operator+(const IntersectionArray operand) const;
     IntersectionArray& operator+=(const IntersectionArray operand);

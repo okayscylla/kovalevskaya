@@ -93,3 +93,12 @@ TEST_CASE("shearing x in proportion to y") { // TODO: implement more tests?
 
     CHECK(b * a == Point(5, 3, 4));
 }
+
+TEST_CASE("chaining transformations") { // PLEASE work :3
+    Tuple4 a = Point(1, 0, 1);
+    Mat4 b = RotateX(PI / 2);
+    Mat4 c = Scale(5, 5, 5);
+    Mat4 d = Translate(10, 5, 7);
+
+    CHECK((d * c * b) * a == Point(15, 0, 7));
+}

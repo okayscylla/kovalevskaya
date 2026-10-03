@@ -10,7 +10,7 @@ class Tuple3 {
     Tuple3& operator+=(const Tuple3 operand);
     Tuple3& operator-=(const Tuple3 operand);
 
-    Tuple3 operator*(const double scalar) const;
+    Tuple3 operator*(const double scalar) const; // FIXME: add * and *= operators for multiplying by matrices?
     Tuple3 operator/(const double scalar) const;
     Tuple3& operator*=(const double scalar);
     Tuple3& operator/=(const double scalar);

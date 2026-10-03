@@ -69,3 +69,16 @@ TEST_CASE("ray-sphere intersections (2 intersection from ray in front of the sph
     CHECK(intersections[0].t == -6.0f);
     CHECK(intersections[1].t == -4.0f);
 }
+
+TEST_CASE("intersectiong a scaled sphere with a ray") {
+    Ray r = Ray(Point(0, 0, -5), Vector(0, 0, 1));
+    Sphere s = Sphere(67);
+
+    s.transform(Scale(2, 2, 2));
+
+    IntersectionArray intersections = s.intersect(r);
+
+    CHECK(intersections.size() == 2);
+    CHECK(intersections[0].t == 3.f);
+    CHECK(intersections[1].t == 7.f);
+}

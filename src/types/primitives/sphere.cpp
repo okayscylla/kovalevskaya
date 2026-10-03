@@ -7,7 +7,9 @@
 
 
 IntersectionArray Sphere::intersect(Ray r) const {
-    Tuple4 sphere_ray = r.origin - Point(0, 0, 0); // FIXME: add support for centers other than the world origin
+    r = r.transform(transformation.inverse());
+
+    Tuple4 sphere_ray = (r.origin - Point(0, 0, 0)); // FIXME: add support for centers other than the world origin
 
     float a = r.direction.dot(r.direction);
     float b = 2 * r.direction.dot(sphere_ray);

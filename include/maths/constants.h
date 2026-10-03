@@ -1,5 +1,6 @@
 #pragma once
 
 
-#define EPSILON 0.00001f
-#define PI      3.14159f
+#define EPSILON     0.00001f
+#define PI          3.14159f
+#define INFINITY    999999.f

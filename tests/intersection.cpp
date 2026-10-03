@@ -26,3 +26,35 @@ TEST_CASE("adding two intersection arrays (inplace)") {
     CHECK(a[2].t == Intersection(3, &s).t);
     CHECK(a[3].t == Intersection(4, &s).t);
 }
+
+TEST_CASE("search for a hit (valid hit exists)") {
+    Sphere s = Sphere(67);
+
+    IntersectionArray a = IntersectionArray({
+        Intersection(-1, &s),
+        Intersection(1, &s),
+        Intersection(0.1, &s),
+        Intersection(0.5, &s)
+    });
+
+    Intersection i = a.findHit();
+
+    CHECK(i.null == false);
+    CHECK(assertEqual(i.t, 0.1));
+    CHECK(i.object == &s);
+}
+
+TEST_CASE("searching for a hit (no valid hits)") {
+    Sphere s = Sphere(67);
+
+    IntersectionArray a = IntersectionArray({
+        Intersection(-1, &s),
+        Intersection(-1, &s),
+        Intersection(-0.1, &s),
+        Intersection(-0.5, &s)
+    });
+
+    Intersection i = a.findHit();
+
+    CHECK(i.null == true);
+}

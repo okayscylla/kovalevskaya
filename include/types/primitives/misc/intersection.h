@@ -1,5 +1,7 @@
 #pragma once
 
+#include "maths/constants.h"
+
 #include <vector>
 
 
@@ -9,8 +11,10 @@ struct Intersection { // TODO: add ==, !=, etcetera operators
     public:
     const float t;
     const Primitive* object;
+    const bool null; // TODO: find a better way of doing this :3
 
-    Intersection(float _t, const Primitive* _object) : t(_t), object(_object) {}
+    Intersection(float _t, const Primitive* _object) : t(_t), object(_object), null(false) {}
+    Intersection() : t(-INFINITY), object(nullptr), null(true) {}
 };
 
 struct IntersectionArray { // TODO: add ==, !=, etcetera operators

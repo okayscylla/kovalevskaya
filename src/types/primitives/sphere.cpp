@@ -30,3 +30,7 @@ IntersectionArray Sphere::intersect(Ray r) const {
 
     return IntersectionArray({t1, t2});
 }
+
+Tuple4 Sphere::normalAt(const Tuple4 p) const {
+    return (p - Point(0, 0, 0)).normalise(); // FIXME: see above
+}

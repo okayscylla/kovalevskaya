@@ -70,7 +70,7 @@ TEST_CASE("ray-sphere intersections (2 intersection from ray in front of the sph
     CHECK(intersections[1].t == -4.0f);
 }
 
-TEST_CASE("intersectiong a scaled sphere with a ray") {
+TEST_CASE("intersecting a scaled sphere with a ray") {
     Ray r = Ray(Point(0, 0, -5), Vector(0, 0, 1));
     Sphere s = Sphere(67);
 
@@ -81,4 +81,25 @@ TEST_CASE("intersectiong a scaled sphere with a ray") {
     CHECK(intersections.size() == 2);
     CHECK(intersections[0].t == 3.f);
     CHECK(intersections[1].t == 7.f);
+}
+
+TEST_CASE("finding a normal on a sphere") {
+    Sphere s = Sphere(67);
+    Tuple4 n = s.normalAt(Point(std::sqrtf(3) / 3, std::sqrtf(3) / 3, std::sqrtf(3) / 3));
+
+    CHECK(n == Vector(std::sqrtf(3) / 3, std::sqrtf(3) / 3, std::sqrtf(3) / 3));
+}
+
+TEST_CASE("finding a normal on a sphere (axis aligned)") {
+    Sphere s = Sphere(67);
+    Tuple4 n = s.normalAt(Point(0, 0, 1));
+
+    CHECK(n == Vector(0, 0, 1));
+}
+
+TEST_CASE("normals are normalised (wuh)") {
+    Sphere s = Sphere(67);
+    Tuple4 n = s.normalAt(Point(std::sqrtf(3) / 3, std::sqrtf(3) / 3, std::sqrtf(3) / 3));
+
+    CHECK(n == n.normalise());
 }

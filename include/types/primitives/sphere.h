@@ -9,4 +9,6 @@ class Sphere : public Primitive {
     Tuple4 normalAt(const Tuple4 p) const;
 
     Sphere(int _id) : Primitive(_id) {}
+
+    ~Sphere() {}
 };

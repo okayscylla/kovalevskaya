@@ -11,7 +11,7 @@ class Primitive {
     const int id;
 
     virtual IntersectionArray intersect(Ray r) const;
-    virtual Tuple4 normalAt(const Tuple4 p) const;
+    virtual Tuple4 normalAt(const Tuple4 p, bool world_space = true) const;
     
     Primitive& transform(const Mat4 operand); // TODO: implement Primitive::transformed / decide what that should do
 

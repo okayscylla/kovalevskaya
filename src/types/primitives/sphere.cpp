@@ -31,6 +31,16 @@ IntersectionArray Sphere::intersect(Ray r) const {
     return IntersectionArray({t1, t2});
 }
 
-Tuple4 Sphere::normalAt(const Tuple4 p) const {
-    return (p - Point(0, 0, 0)).normalise(); // FIXME: see above
+Tuple4 Sphere::normalAt(const Tuple4 p, bool world_space) const {
+    Tuple4 local_point = transformation.inverse() * p;
+    Tuple4 local_normal = local_point - Point(0, 0, 0); // FIXME: see above
+
+    if (world_space) {
+        Tuple4 world_normal = transformation.inverse().transpose() * local_normal;
+        world_normal.w = 0; // sketchy hack :peepoScared:
+
+        return world_normal.normalise();
+    } else {
+        return local_normal.normalise();
+    }
 }

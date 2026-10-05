@@ -85,21 +85,37 @@ TEST_CASE("intersecting a scaled sphere with a ray") {
 
 TEST_CASE("finding a normal on a sphere") {
     Sphere s = Sphere(67);
-    Tuple4 n = s.normalAt(Point(std::sqrtf(3) / 3, std::sqrtf(3) / 3, std::sqrtf(3) / 3));
+    Tuple4 n = s.normalAt(Point(std::sqrtf(3) / 3, std::sqrtf(3) / 3, std::sqrtf(3) / 3), false);
 
     CHECK(n == Vector(std::sqrtf(3) / 3, std::sqrtf(3) / 3, std::sqrtf(3) / 3));
 }
 
 TEST_CASE("finding a normal on a sphere (axis aligned)") {
     Sphere s = Sphere(67);
-    Tuple4 n = s.normalAt(Point(0, 0, 1));
+    Tuple4 n = s.normalAt(Point(0, 0, 1), false);
 
     CHECK(n == Vector(0, 0, 1));
 }
 
 TEST_CASE("normals are normalised (wuh)") {
     Sphere s = Sphere(67);
-    Tuple4 n = s.normalAt(Point(std::sqrtf(3) / 3, std::sqrtf(3) / 3, std::sqrtf(3) / 3));
+    Tuple4 n = s.normalAt(Point(std::sqrtf(3) / 3, std::sqrtf(3) / 3, std::sqrtf(3) / 3), false);
 
     CHECK(n == n.normalise());
+}
+
+TEST_CASE("normals on a translated sphere") {
+    Sphere s = Sphere(67);
+    s.transform(Translate(0, 1, 0));
+    Tuple4 n = s.normalAt(Point(0, 1.70711, -0.70711));
+
+    CHECK(n == Vector(0, 0.70711, -0.70711));
+}
+
+TEST_CASE("normals on a transformed sphere") { // FIXME: make this test work :3
+    Sphere s = Sphere(67);
+    s.transform(Scale(1, 0.5, 1) * RotateZ(PI / 5));
+    Tuple4 n = s.normalAt(Point(0, std::sqrtf(2) / 2, -(std::sqrtf(3) / 3)));
+
+    CHECK(n == Vector(0, 0.97014, -0.24254));
 }

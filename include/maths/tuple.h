@@ -23,7 +23,7 @@ class Tuple3 {
 
     float magnitude() const;
     Tuple3& normalise();
-    
+
     float dot(const Tuple3 operand) const;
     Tuple3 cross(const Tuple3 operand) const;
 
@@ -56,9 +56,11 @@ class Tuple4 {
 
     float magnitude() const;
     Tuple4& normalise();
-    
+
     float dot(const Tuple4 operand) const;
     Tuple4 cross(const Tuple4 operand) const;
+
+    Tuple4 reflect(const Tuple4 normal) const; // TODO: add inplace version?
 
     Tuple4(float _x, float _y, float _z, float _w) : x(_x), y(_y), z(_z), w(_w) {}
     Tuple4() : x(0), y(0), z(0), w(0) {}

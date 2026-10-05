@@ -226,3 +226,17 @@ TEST_CASE("cross product of two tuple3s") {
     CHECK(a.cross(b) == Tuple3(-1, 2, -1));
     CHECK(b.cross(a) == a.cross(b).negate());
 }
+
+TEST_CASE("reflecting against a pi / 4 rad surface") { // hehe radians > degrees
+    Tuple4 v = Vector(1, -1, 0);
+    Tuple4 n = Vector(0, 1, 0);
+
+    CHECK(v.reflect(n) == Vector(1, 1, 0));
+}
+
+TEST_CASE("im tired its vector something") {
+    Tuple4 v = Vector(0, -1, 0);
+    Tuple4 n = Vector(std::sqrtf(2) / 2, std::sqrtf(2) / 2, 0);
+
+    CHECK(v.reflect(n) == Vector(1, 0, 0));
+}

@@ -242,3 +242,7 @@ Tuple4 Tuple4::cross(const Tuple4 operand) const {
         x * operand.y - y * operand.x
     );
 }
+
+Tuple4 Tuple4::reflect(const Tuple4 normal) const {
+    return *this - (normal * 2 * dot(normal));
+}

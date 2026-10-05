@@ -112,10 +112,10 @@ TEST_CASE("normals on a translated sphere") {
     CHECK(n == Vector(0, 0.70711, -0.70711));
 }
 
-TEST_CASE("normals on a transformed sphere") { // FIXME: make this test work :3
+TEST_CASE("normals on a transformed sphere") {
     Sphere s = Sphere(67);
     s.transform(Scale(1, 0.5, 1) * RotateZ(PI / 5));
-    Tuple4 n = s.normalAt(Point(0, std::sqrtf(2) / 2, -(std::sqrtf(3) / 3)));
+    Tuple4 n = s.normalAt(Point(0, std::sqrtf(2) / 2, -(std::sqrtf(2) / 2)));
 
     CHECK(n == Vector(0, 0.97014, -0.24254));
 }

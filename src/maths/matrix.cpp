@@ -366,7 +366,7 @@ Mat3 Mat4::submatrix(int r, int c) const {
 }
 
 float Mat4::determinant() const { // TODO: pick the smallest row / col to reduce required computations?
-    int v = 0;
+    float v = 0;
 
     for (int i=0; i < 4; i++) {
         v += _arr[i] * cofactor(0, i);

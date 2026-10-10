@@ -60,6 +60,7 @@ void ColouredScreen::draw() {
         NULL, NULL
     );
     
+    #pragma omp parallel for
     for (int i=0; i < height; i++) { // TODO: clean this up :3
         for (int j=0; j < width; j++) {
             writePixel(j, i, Colour((float)i / height, (float)j / width, 1).toInt());

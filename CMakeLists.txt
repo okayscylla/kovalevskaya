@@ -5,16 +5,20 @@ set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-add_compile_options(-Wall) # -O3 -march=native -fopenmp
+add_compile_options(-Wall -fopenmp) # -O3 -march=native
 
 find_package(SDL3 REQUIRED)
+
+if (UNIX)
+    find_package(OpenMP REQUIRED)
+endif()
 
 file(GLOB SOURCES "src/*.cpp" "src/*/*.cpp" "src/*/*/*.cpp" "src/*/*/*/*.cpp")
 add_executable(kovalevskaya main.cpp ${SOURCES})
 target_include_directories(kovalevskaya PRIVATE "include")
 
 if (UNIX)
-    target_link_libraries(kovalevskaya PRIVATE SDL3::SDL3)
+    target_link_libraries(kovalevskaya PRIVATE SDL3::SDL3 OpenMP::OpenMP_CXX)
 elseif (WIN32)
     target_link_libraries(kovalevskaya PRIVATE SDL3::SDL3)
 endif()

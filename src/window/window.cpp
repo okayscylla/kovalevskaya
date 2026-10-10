@@ -18,6 +18,8 @@ void KovWindow::init(int w, int h, std::string title, int t_fpss) {
     _sdlsfmts = SDL_GPU_SHADERFORMAT_MSL | SDL_GPU_SHADERFORMAT_SPIRV | SDL_GPU_SHADERFORMAT_DXIL | SDL_GPU_SHADERFORMAT_MSL;
     klog("using shaderformat {}\n", _sdlsfmts);
 
+    SDL_SetHint(SDL_HINT_GPU_DRIVER, "vulkan"); // force vulkan rendering
+
     _sdlhgpu = SDL_CreateGPUDevice(
         _sdlsfmts,
         false,

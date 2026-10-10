@@ -1,5 +1,7 @@
 #include "render/raytracer/raytracer.h"
 
+#include "types/primitives/sphere.h"
+
 #include <cstdlib>
 
 
@@ -58,6 +60,8 @@ void RayTracer::draw() {
         NULL, NULL
     );
 
+    renderFrame();
+
     void* _g_tbloc = SDL_MapGPUTransferBuffer(_hdlgpu, _g_tbhdl, true);
 
     memcpy(_g_tbloc, pix_buf, pix_buf_size);
@@ -105,6 +109,38 @@ void RayTracer::cleanup() {
     SDL_ReleaseGPUTexture(_hdlgpu, _g_imthdl);
 
     free(pix_buf);
+}
+
+void RayTracer::renderFrame() {
+    Sphere s = Sphere(67);
+    Tuple4 ray_origin = Point(0, 0, -5);
+    float wall_z = 10.f;
+    float wall_size = 7.f;
+
+    float pixel_size_x = wall_size / width;
+    float pixel_size_y = wall_size / height;
+
+    float half_x = width / 2;
+    float half_y = height / 2;
+
+    for (int i=0; i < height; i++) { // TODO: clean this up :3
+        int world_y = (half_y - pixel_size_y) * i;
+
+        for (int j=0; j < width; j++) {
+            int world_x = ((-half_x) - pixel_size_x) * j;
+
+            Tuple4 position = Point(world_x, world_y, wall_z); // z = 10
+
+            Ray r = Ray(ray_origin, (position - ray_origin).normalise());
+            Intersection x = s.intersect(r).findHit();
+
+            if (!x.null) {
+                writePixel(j, i, Colour(1,1,1).toInt());
+            } else {
+                writePixel(j, i, Colour(0,0,0).toInt());
+            }
+        }
+    }
 }
 
 void RayTracer::writePixel(int x, int y, uint32_t value) {

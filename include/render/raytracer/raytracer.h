@@ -11,6 +11,7 @@ class RayTracer : public Renderer {
     void cleanup();
 
     void draw();
+    void renderFrame();
 
     private:
     void writePixel(int x, int y, uint32_t value);

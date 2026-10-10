@@ -44,23 +44,27 @@ IntersectionArray IntersectionArray::append(const Intersection intersection) {
 }
 
 const Intersection IntersectionArray::findHit() const { // intersection with lowest nonnegative value
-    int v = 0;
+    if (size() > 0) {
+        int v = 0;
 
-    for (int i=0; i < intersections.size(); i++) {
-        if ((intersections[i].t > 0) && !assertEqual(intersections[v].t, intersections[i].t)) {
-            if (intersections[v].t < 0) {
-                v = i;
-            } else {
-                if (intersections[i].t < intersections[v].t) {
+        for (int i=0; i < intersections.size(); i++) {
+            if ((intersections[i].t > 0) && !assertEqual(intersections[v].t, intersections[i].t)) {
+                if (intersections[v].t < 0) {
                     v = i;
+                } else {
+                    if (intersections[i].t < intersections[v].t) {
+                        v = i;
+                    }
                 }
             }
         }
-    }
 
-    if ((intersections[v].t > 0) && notZero(intersections[v].t)) {
-        return intersections[v];
+        if ((intersections[v].t > 0) && notZero(intersections[v].t)) {
+            return intersections[v];
+        } else {
+            return Intersection(); // null intersection (no hit)
+        }
     } else {
-        return Intersection(); // null intersection (no hit)
+        return Intersection();
     }
 }

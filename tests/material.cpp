@@ -32,7 +32,7 @@ TEST_CASE("phong lighting with the eye between light and surface") {
 TEST_CASE("phong lighting with the eye between light and surface (eye offset pi / 4 radians)") {
     Material material = Material();
     Tuple4 position = Point(0, 0, 0);
-    Tuple4 eye_vector = Vector(std::sqrtf(2) / 2, -(std::sqrtf(2) / 2), -1);
+    Tuple4 eye_vector = Vector(0, std::sqrtf(2) / 2, -(std::sqrtf(2) / 2));
     Tuple4 normal_vector = Vector(0, 0, -1);
     PointLight light = PointLight(Point(0, 0, -10), Colour(1, 1, 1));
 
@@ -61,7 +61,8 @@ TEST_CASE("lighting with eye in the path of reflection vector") {
     PointLight light = PointLight(Point(0, 10, -10), Colour(1, 1, 1));
 
     Colour lighting = Phong::calculateLighting(material, position, light, eye_vector, normal_vector);
-    CHECK(lighting == Colour(1.6364, 1.6364, 1.6364));
+
+    CHECK(lighting == Colour(1.63639, 1.63639, 1.63639));
 }
 
 TEST_CASE("phong lighting with light behind surface") {

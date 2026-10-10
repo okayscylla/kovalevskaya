@@ -12,7 +12,7 @@ class Light {
     Light(Tuple4 _p, Colour _i) : position(_p), intensity(_i) {}
 };
 
-class PointLight : Light {
+class PointLight : public Light {
     public:
     PointLight(Tuple4 pos) : Light(pos, Colour(1,1,1)) {}
     PointLight(Tuple4 pos, Colour _i) : Light(pos, _i) {}

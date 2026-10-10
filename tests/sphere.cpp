@@ -127,7 +127,7 @@ TEST_CASE("spheres have a default material") {
 }
 
 TEST_CASE("assigning a custom material") {
-    Sphere s = Sphere(67, Material(1,0.9,0.9,200));
+    Sphere s = Sphere(67, Material(Colour(1,1,1),1,0.9,0.9,200));
 
-    CHECK(s.material == Material(1,0.9,0.9,200));
+    CHECK(s.material == Material(Colour(1,1,1),1,0.9,0.9,200));
 }

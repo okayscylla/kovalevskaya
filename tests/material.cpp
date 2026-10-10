@@ -4,12 +4,13 @@
 #include "types/scene/material.h"
 #include "types/scene/light.h"
 #include "maths/tuple.h"
-#include "render/raytracer/phong.h"
+#include "render/raytracer/lighting.h"
 
 
 TEST_CASE("material smth smth im silly :3") {
     Material s = Material();
 
+    CHECK(s.colour == Colour(1,1,1));
     CHECK(s.ambient == 0.1f);
     CHECK(s.diffuse == 0.9f);
     CHECK(s.specular == 0.9f);

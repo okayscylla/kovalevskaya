@@ -8,6 +8,7 @@
 
 bool Material::operator==(const Material operand) const {
     return (
+        (colour == operand.colour) &&
         assertEqual(ambient, operand.ambient) &&
         assertEqual(diffuse, operand.diffuse) &&
         assertEqual(specular, operand.specular) &&

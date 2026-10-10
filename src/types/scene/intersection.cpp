@@ -1,4 +1,4 @@
-#include "types/primitives/misc/intersection.h"
+#include "types/scene/intersection.h"
 
 #include "maths/constants.h"
 #include "utils/macros.h"

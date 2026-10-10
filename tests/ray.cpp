@@ -1,6 +1,6 @@
 #include "misc/base.h"
 
-#include "types/primitives/misc/ray.h"
+#include "types/scene/ray.h"
 
 
 TEST_CASE("creating a ray yay") { // hey that rhymes!

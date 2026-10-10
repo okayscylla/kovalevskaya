@@ -1,4 +1,4 @@
-#include "types/primitives/misc/ray.h"
+#include "types/scene/ray.h"
 
 
 Tuple4 Ray::at(float t) const {

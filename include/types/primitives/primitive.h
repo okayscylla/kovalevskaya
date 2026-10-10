@@ -2,20 +2,23 @@
 
 #include "maths/matrix.h"
 #include "maths/tuple.h"
-#include "types/primitives/misc/ray.h"
-#include "types/primitives/misc/intersection.h"
+#include "types/scene/ray.h"
+#include "types/scene/intersection.h"
+#include "types/scene/material.h"
 
 
 class Primitive {
     public:
     const int id;
+    const Material material;
 
     virtual IntersectionArray intersect(Ray r) const;
     virtual Tuple4 normalAt(const Tuple4 p, bool world_space = true) const;
     
     Primitive& transform(const Mat4 operand); // TODO: implement Primitive::transformed / decide what that should do
 
-    Primitive(int _id) : id(_id) {} // FIXME: implement some sort of scene manager class to assign these automatically
+    Primitive(int _id, Material _material) : id(_id), material(_material) {} // FIXME: implement some sort of scene manager class to assign these automatically
+    Primitive(int _id) : id(_id), material(Material()) {} // FIXME: implement some sort of scene manager class to assign these automatically
 
     virtual ~Primitive() {}
 

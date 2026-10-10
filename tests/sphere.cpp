@@ -119,3 +119,15 @@ TEST_CASE("normals on a transformed sphere") {
 
     CHECK(n == Vector(0, 0.97014, -0.24254));
 }
+
+TEST_CASE("spheres have a default material") {
+    Sphere s = Sphere(67);
+
+    CHECK(s.material == Material());
+}
+
+TEST_CASE("assigning a custom material") {
+    Sphere s = Sphere(67, Material(1,0.9,0.9,0.9,200));
+
+    CHECK(s.material = Material(1,0.9,0.9,0.9,200));
+}

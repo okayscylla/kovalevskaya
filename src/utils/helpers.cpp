@@ -1,5 +1,7 @@
 #include "utils/helpers.h"
 
+#include "utils/macros.h"
+
 
 Mat4 ViewTransform(Tuple4 from, Tuple4 to, Tuple4 up) {
     Tuple4 forward = (to - from).normalise();

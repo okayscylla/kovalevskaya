@@ -11,11 +11,11 @@ class Primitive; // forward declartion scawy
 
 struct Intersection { // TODO: add ==, !=, etcetera operators
     public:
-    const float t;
-    const Primitive* object;
-    const bool null; // TODO: find a better way of doing this :3
+    float t;
+    Primitive* object;
+    bool null; // TODO: find a better way of doing this :3
 
-    Intersection(float _t, const Primitive* _object) : t(_t), object(_object), null(false) {}
+    Intersection(float _t, Primitive* _object) : t(_t), object(_object), null(false) {}
     Intersection() : t(-INFINITY), object(nullptr), null(true) {}
 };
 

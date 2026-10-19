@@ -1,7 +1,5 @@
 #pragma once
 
-#include "utils/macros.h"
-
 #include "maths/matrix.h"
 
 

@@ -18,7 +18,8 @@ class Tuple3 {
     bool operator==(const Tuple3 operand) const;
     bool operator!=(const Tuple3 operand) const;
 
-    Tuple3 negate() const;
+    Tuple3& negate();
+    Tuple3 negated() const;
     Tuple3 unitVector() const;
 
     float magnitude() const;
@@ -48,7 +49,8 @@ class Tuple4 {
     bool operator==(const Tuple4 operand) const;
     bool operator!=(const Tuple4 operand) const;
 
-    Tuple4 negate() const;
+    Tuple4& negate();
+    Tuple4 negated() const;
     Tuple4 unitVector() const;
 
     bool isPoint() const;

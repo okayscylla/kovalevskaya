@@ -24,7 +24,7 @@ Colour Phong::calculateLighting(Material material, Tuple4 point, PointLight ligh
     } else {
         diffuse = effective_colour * material.diffuse * on_surface_side;
 
-        Tuple4 reflect_vector = light_vector.negate().reflect(normal_vector);
+        Tuple4 reflect_vector = light_vector.negated().reflect(normal_vector);
 
         float reflects_towards_eye = reflect_vector.dot(eye_vector);
 

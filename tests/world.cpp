@@ -53,13 +53,15 @@ TEST_CASE("shading an intersection (inside)") {
             (new Sphere(1))->transform(Scale(0.5,0.5,0.5))
         },
         {
-            new PointLight(Point(0,025,0))
+            new PointLight(Point(0,0.25,0))
         }
     );
     ComputedIntersectionData v = prepareComputations(
         Intersection(0.5, a.atID(0)),
         Ray(Point(0,0,0),Vector(0,0,1))
     );
+
+    CHECK(v.inside == true);
 
     Colour c = a.shadeHit(v);
 

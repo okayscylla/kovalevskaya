@@ -23,7 +23,8 @@ class Colour {
     bool operator==(const Colour operand) const;
     bool operator!=(const Colour operand) const;
 
-    Colour negate() const;
+    Colour& negate();
+    Colour negated() const;
 
     float magnitude() const;
     Colour& normalise();

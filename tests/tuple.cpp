@@ -80,14 +80,14 @@ TEST_CASE("subtracting two vectors") {
 TEST_CASE("negating a tuple4") {
     Tuple4 a = Tuple4(1, -2, 3, -4);
 
-    CHECK((a.negate()) == Tuple4(-1, 2, -3, 4));
+    CHECK((a.negated()) == Tuple4(-1, 2, -3, 4));
 }
 
 TEST_CASE("subtracting a vector from zero vector") {
     Tuple4 a = Tuple4(0, 0, 0, 0);
     Tuple4 b = Tuple4(1, -2, 3, -4);
 
-    CHECK((a - b) == (b.negate()));
+    CHECK((a - b) == (b.negated()));
 }
 
 TEST_CASE("multiplying tuple4 by a scalar") {
@@ -149,7 +149,7 @@ TEST_CASE("cross product of two vectors") {
     Tuple4 b = Vector(2, 3, 4);
 
     CHECK(a.cross(b) == Vector(-1, 2, -1));
-    CHECK(b.cross(a) == a.cross(b).negate());
+    CHECK(b.cross(a) == a.cross(b).negated());
 }
 
 TEST_CASE("adding two tuple3s") {
@@ -169,7 +169,7 @@ TEST_CASE("subtracting two tuple3s") {
 TEST_CASE("negating a tuple3") {
     Tuple3 a = Tuple3(1, -2, 3);
 
-    CHECK((a.negate()) == Tuple3(-1, 2, -3));
+    CHECK((a.negated()) == Tuple3(-1, 2, -3));
 }
 
 TEST_CASE("multiplying tuple3 by a scalar") {
@@ -224,7 +224,7 @@ TEST_CASE("cross product of two tuple3s") {
     Tuple3 b = Tuple3(2, 3, 4);
 
     CHECK(a.cross(b) == Tuple3(-1, 2, -1));
-    CHECK(b.cross(a) == a.cross(b).negate());
+    CHECK(b.cross(a) == a.cross(b).negated());
 }
 
 TEST_CASE("reflecting against a pi / 4 rad surface") { // hehe radians > degrees

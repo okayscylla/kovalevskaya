@@ -87,13 +87,13 @@ IntersectionArray& IntersectionArray::sortAscending() {
 ComputedIntersectionData prepareComputations(Intersection i, Ray r) { // FIXME: why is this in types
     Tuple4 _normalv = i.object->normalAt(r.at(i.t));
     
-    if (_normalv.dot(r.direction.negate()) < 0) {
+    if (_normalv.dot(r.direction.negated()) < 0) {
         return {
             .t = i.t,
             .object = i.object,
             .point = r.at(i.t),
-            .eyev = r.direction.negate(),
-            .normalv = _normalv.negate(),
+            .eyev = r.direction.negated(),
+            .normalv = _normalv.negated(),
             .inside = true
         };
     } else {
@@ -101,7 +101,7 @@ ComputedIntersectionData prepareComputations(Intersection i, Ray r) { // FIXME: 
             .t = i.t,
             .object = i.object,
             .point = r.at(i.t),
-            .eyev = r.direction.negate(),
+            .eyev = r.direction.negated(),
             .normalv = _normalv,
             .inside = false
         };

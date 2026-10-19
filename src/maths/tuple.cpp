@@ -72,7 +72,15 @@ bool Tuple3::operator!=(const Tuple3 operand) const {
     return !(assertEqual(x, operand.x) && assertEqual(y, operand.y) && assertEqual(z, operand.z));
 }
 
-Tuple3 Tuple3::negate() const {
+Tuple3& Tuple3::negate() {
+    x = -x;
+    y = -y;
+    z = -z;
+
+    return *this;
+}
+
+Tuple3 Tuple3::negated() const {
     return Tuple3(-x, -y, -z);
 }
 
@@ -189,7 +197,16 @@ bool Tuple4::operator!=(const Tuple4 operand) const {
     return !(assertEqual(x, operand.x) && assertEqual(y, operand.y) && assertEqual(z, operand.z) && assertEqual(w, operand.w));
 }
 
-Tuple4 Tuple4::negate() const {
+Tuple4& Tuple4::negate() {
+    x = -x;
+    y = -y;
+    z = -z;
+    w = -w;
+
+    return *this;
+}
+
+Tuple4 Tuple4::negated() const {
     return Tuple4(-x, -y, -z, -w);
 }
 

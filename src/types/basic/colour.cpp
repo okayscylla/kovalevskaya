@@ -85,7 +85,15 @@ bool Colour::operator!=(const Colour operand) const {
     return !(assertEqual(red, operand.red) && assertEqual(green, operand.green) && assertEqual(blue, operand.blue));
 }
 
-Colour Colour::negate() const {
+Colour& Colour::negate() {
+    red = -red;
+    green = -green;
+    blue = -blue;
+
+    return *this;
+}
+
+Colour Colour::negated() const {
     return Colour(-red, -green, blue);
 }
 

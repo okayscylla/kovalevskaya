@@ -18,4 +18,4 @@
 #define White                                   Colour(1,1,1)
 #define Black                                   Colour(0,0,0)
 
-#define DefaultWorld                            World({Sphere(0, Material(Colour(0.8,1.0,0.6),0.7,0.2,0.9,200)), Sphere(1).transform(Scale(0.5,0.5,0.5))},{PointLight(Point(-10,10,-10))})
+#define DefaultWorld                            World({new Sphere(0,Material(Colour(0.8,1.0,0.6),0.7,0.2,0.9,200)),&(new Sphere(1))->transform(Scale(0.5,0.5,0.5))},{new PointLight(Point(-10,10,-10))})

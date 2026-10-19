@@ -7,8 +7,8 @@
 IntersectionArray World::intersect(Ray r) const {
     IntersectionArray arr;
 
-    for (Primitive obj : objects) { // TODO: implement a BVH
-        arr += obj.intersect(r);
+    for (Primitive* obj : objects) { // TODO: implement a BVH
+        arr += obj->intersect(r);
     }
 
     arr.sortAscending();
@@ -16,8 +16,8 @@ IntersectionArray World::intersect(Ray r) const {
     return arr;
 }
 
-World& World::addObject(Primitive object) {
-    object.init(next_free_id);
+World& World::addObject(Primitive* object) {
+    object->init(next_free_id);
     objects.push_back(object);
 
     next_free_id++;
@@ -25,7 +25,7 @@ World& World::addObject(Primitive object) {
     return *this;
 }
 
-World& World::addLight(PointLight light) { // yeah
+World& World::addLight(PointLight* light) { // yeah
     lights.push_back(light);
 
     return *this;
@@ -36,14 +36,14 @@ bool World::isEmpty() const {
 }
 
 Primitive* World::atID(int id) {
-    return &objects[id]; // FIXME: this is just a hack and an awful idea lol
+    return objects[id]; // FIXME: this is just a hack and an awful idea lol
 }
 
 Colour World::shadeHit(ComputedIntersectionData v) const { // FIXME: don't hardcode lighting model
     return Phong::calculateLighting(
         v.object->material, 
         v.point,
-        lights[0], // FIXME: do this for every light in scene
+        *lights[0], // FIXME: do this for every light in scene
         v.eyev,
         v.normalv
     );

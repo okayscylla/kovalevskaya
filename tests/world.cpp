@@ -15,7 +15,7 @@
 TEST_CASE("default world") { // FIXME: this is not a complete check of equality im only checking materials
     World a = DefaultWorld;
 
-    CHECK(a.atID(0)->material == Material(Colour(0.8,1.0,0.6)));
+    CHECK(a.atID(0)->material == Material(Colour(0.8,1.0,0.6),0.7,0.2,0.9,200));
     CHECK(a.atID(1)->material == Material()); // does s1 have the default material or not?
 }
 
@@ -40,18 +40,27 @@ TEST_CASE("shading an intersection (outside)") {
 
     Colour c = a.shadeHit(v);
 
+    CHECK(c.red == 0.38066);
+
     CHECK(c == Colour(0.38066,0.47583,0.28550));
 }
 
 TEST_CASE("shading an intersection (inside)") {
-    World a = DefaultWorld;
-    a.addLight(PointLight(Point(0,0.25,0),Colour(1,1,1)));
+    World a = World(
+        {
+            new Sphere(0, Material(Colour(0.8,1.0,0.6),0.7,0.2,0.9,200)),
+            &(new Sphere(1))->transform(Scale(0.5,0.5,0.5))
+        },
+        {new PointLight(Point(0,0.25,0),Colour(1,1,1))}
+    );
     ComputedIntersectionData v = prepareComputations(
         Intersection(0.5, a.atID(0)),
         Ray(Point(0,0,0),Vector(0,0,1))
     );
 
     Colour c = a.shadeHit(v);
+
+    CHECK(c.red == 0.90498);
 
     CHECK(c == Colour(0.90498,0.90498,0.90498));
 }
@@ -70,6 +79,8 @@ TEST_CASE("the colour when a ray hits") {
     Ray r = Ray(Point(0,0,-5),Vector(0,0,1));
 
     Colour c = a.colourAt(r);
+
+    CHECK(c.red == 0.38066);
 
     CHECK(c == Colour(0.38066,0.47583,0.28550));
 }

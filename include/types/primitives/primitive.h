@@ -10,7 +10,7 @@
 class Primitive {
     public:
     int id; // TODO: reorganise so this is const
-    const Material material;
+    Material material;
 
     virtual IntersectionArray intersect(Ray r) const;
     virtual Tuple4 normalAt(const Tuple4 p, bool world_space = true) const;

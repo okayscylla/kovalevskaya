@@ -5,8 +5,8 @@
 
 struct Material {
     public:
-    const Colour colour;
-    const float ambient, diffuse, specular, shininess;
+    Colour colour;
+    float ambient, diffuse, specular, shininess;
 
     bool operator==(const Material operand) const;
     bool operator!=(const Material operand) const;

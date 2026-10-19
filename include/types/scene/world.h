@@ -15,7 +15,7 @@ struct World { // 67 hehe :3
     World& addLight(PointLight light); // TODO: lights need an id system too, maybe merge objects and lights into one metatype?
 
     bool isEmpty() const;
-    Primitive atID(int id) const;
+    Primitive* atID(int id);
 
     Colour shadeHit(ComputedIntersectionData v) const;
     Colour colourAt(Ray r) const;

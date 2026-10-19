@@ -35,8 +35,8 @@ bool World::isEmpty() const {
     return ((objects.size() == 0) && (lights.size() == 0));
 }
 
-Primitive World::atID(int id) const {
-    return objects[id]; // FIXME: this is just a hack and an awful idea lol
+Primitive* World::atID(int id) {
+    return &objects[id]; // FIXME: this is just a hack and an awful idea lol
 }
 
 Colour World::shadeHit(ComputedIntersectionData v) const { // FIXME: don't hardcode lighting model

@@ -1,5 +1,7 @@
 #include "types/scene/intersection.h"
 
+#include "types/primitives/primitive.h"
+
 #include "maths/constants.h"
 #include "utils/macros.h"
 
@@ -77,28 +79,31 @@ IntersectionArray& IntersectionArray::sortAscending() {
         [](Intersection a, Intersection b) { // lambda functions my beloved
             return a.t < b.t;
         }
-    )
+    );
 
     return *this;
 }
 
 ComputedIntersectionData prepareComputations(Intersection i, Ray r) { // FIXME: why is this in types
-    ComputedIntersectionData c;
-
-    c.t = i.t;
-    c.object = i.object;
-    c.point = r.at(c.t);
-    c.eyev = ray.direction.negate();
-
-    Tuple4 _normalv = i.object->normalAt(c.point);
-
-    if (_normalv.dot(comps.eyev) < 0) { // TODO: clean this up & fix floating point inaccuracy
-        c.normalv = _normalv.negate();
-        c.inside = true;
+    Tuple4 _normalv = i.object->normalAt(r.at(i.t));
+    
+    if (_normalv.dot(r.direction.negate()) < 0) {
+        return {
+            .t = i.t,
+            .object = i.object,
+            .point = r.at(i.t),
+            .eyev = r.direction.negate(),
+            .normalv = _normalv.negate(),
+            .inside = true
+        };
     } else {
-        c.normalv = _normalv;
-        c.inside = false;
+        return {
+            .t = i.t,
+            .object = i.object,
+            .point = r.at(i.t),
+            .eyev = r.direction.negate(),
+            .normalv = _normalv,
+            .inside = false
+        };
     }
-
-    return c;
 }

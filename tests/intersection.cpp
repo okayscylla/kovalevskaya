@@ -60,9 +60,9 @@ TEST_CASE("searching for a hit (no valid hits)") {
 }
 
 TEST_CASE("an intersection hit on the outside") {
-    Shape s = Sphere(67);
+    Sphere s = Sphere(67);
     Ray r = Ray(Point(0,0,-5), Vector(0,0,1));
-    Intersection x = Intersection(4, s);
+    Intersection x = Intersection(4, &s);
 
     ComputedIntersectionData c = prepareComputations(x, r);
 
@@ -70,9 +70,9 @@ TEST_CASE("an intersection hit on the outside") {
 }
 
 TEST_CASE("an intersection hit on the inside") {
-    Shape s = Sphere(67);
+    Sphere s = Sphere(67);
     Ray r = Ray(Point(0,0,0), Vector(0,0,1));
-    Intersection x = Intersection(1, s);
+    Intersection x = Intersection(1, &s);
 
     ComputedIntersectionData c = prepareComputations(x, r);
 

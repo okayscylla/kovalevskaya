@@ -109,7 +109,7 @@ TEST_CASE("transformation matrix for default oreintation") {
         Point(0,0,0),
         Point(0,0,-1),
         Vector(0,1,0)
-    )
+    );
 
     CHECK(a == Mat4()); // identity matrix
 }
@@ -119,7 +119,7 @@ TEST_CASE("view transformation matrix in pos z direction") {
         Point(0,0,0),
         Point(0,0,1),
         Vector(0,1,0)
-    )
+    );
 
     CHECK(a == Scale(-1,1,-1));
 }
@@ -129,7 +129,7 @@ TEST_CASE("view translation moving the world") {
         Point(0,0,8),
         Point(0,0,0),
         Vector(0,1,0)
-    )
+    );
 
     CHECK(a == Translate(0,0,-8));
 }
@@ -141,10 +141,10 @@ TEST_CASE("idk just a random view transformation") {
         Vector(1,1,0)
     );
 
-    CHECK(a == Mat4(
+    CHECK(a == Mat4({
         -0.50709,0.50709,0.67612,-2.36643,
         0.76772,0.60609,0.12122,-2.82843,
         -0.35857,0.59761,-0.71714,0.00000,
         0.00000,0.00000,0.00000,1.00000
-    ));
+    }));
 }

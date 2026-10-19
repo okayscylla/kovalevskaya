@@ -66,5 +66,5 @@ class Tuple4 {
     Tuple4() : x(0), y(0), z(0), w(0) {}
 };
 
-#define Point(x, y, z)      Tuple4(x, y, z, 1.0)
-#define Vector(x, y, z)     Tuple4(x, y, z, 0.0)
+#define Point(x, y, z)      Tuple4(x, y, z, 1.0) // FIXME: this should be in macros.h
+#define Vector(x, y, z)     Tuple4(x, y, z, 0.0) // FIXME: this should be in macros.h

@@ -1,6 +1,7 @@
 #include "misc/base.h"
 
 #include "maths/matrix.h"
+#include "utils/helpers.h"
 #include <cmath>
 
 
@@ -101,4 +102,49 @@ TEST_CASE("chaining transformations") { // PLEASE work :3
     Mat4 d = Translate(10, 5, 7);
 
     CHECK((d * c * b) * a == Point(15, 0, 7));
+}
+
+TEST_CASE("transformation matrix for default oreintation") {
+    Mat4 a = ViewTransform(
+        Point(0,0,0),
+        Point(0,0,-1),
+        Vector(0,1,0)
+    )
+
+    CHECK(a == Mat4()); // identity matrix
+}
+
+TEST_CASE("view transformation matrix in pos z direction") {
+    Mat4 a = ViewTransform(
+        Point(0,0,0),
+        Point(0,0,1),
+        Vector(0,1,0)
+    )
+
+    CHECK(a == Scale(-1,1,-1));
+}
+
+TEST_CASE("view translation moving the world") {
+    Mat4 a = ViewTransform(
+        Point(0,0,8),
+        Point(0,0,0),
+        Vector(0,1,0)
+    )
+
+    CHECK(a == Translate(0,0,-8));
+}
+
+TEST_CASE("idk just a random view transformation") {
+    Mat4 a = ViewTransform(
+        Point(1,3,2),
+        Point(4,-2,8),
+        Vector(1,1,0)
+    );
+
+    CHECK(a == Mat4(
+        -0.50709,0.50709,0.67612,-2.36643,
+        0.76772,0.60609,0.12122,-2.82843,
+        -0.35857,0.59761,-0.71714,0.00000,
+        0.00000,0.00000,0.00000,1.00000
+    ));
 }

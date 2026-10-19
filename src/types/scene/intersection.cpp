@@ -3,6 +3,7 @@
 #include "maths/constants.h"
 #include "utils/macros.h"
 
+#include <algorithm>
 #include <iterator>
 #include <cmath>
 
@@ -67,4 +68,37 @@ const Intersection IntersectionArray::findHit() const { // intersection with low
     } else {
         return Intersection();
     }
+}
+
+IntersectionArray& IntersectionArray::sortAscending() {
+    std::sort(
+        intersections.begin(),
+        intersections.end(),
+        [](Intersection a, Intersection b) { // lambda functions my beloved
+            return a.t < b.t;
+        }
+    )
+
+    return *this;
+}
+
+ComputedIntersectionData prepareComputations(Intersection i, Ray r) { // FIXME: why is this in types
+    ComputedIntersectionData c;
+
+    c.t = i.t;
+    c.object = i.object;
+    c.point = r.at(c.t);
+    c.eyev = ray.direction.negate();
+
+    Tuple4 _normalv = i.object->normalAt(c.point);
+
+    if (_normalv.dot(comps.eyev) < 0) { // TODO: clean this up & fix floating point inaccuracy
+        c.normalv = _normalv.negate();
+        c.inside = true;
+    } else {
+        c.normalv = _normalv;
+        c.inside = false;
+    }
+
+    return c;
 }

@@ -6,6 +6,6 @@
 #include "maths/tuple.h"
 
 
-namespace Phong {
+namespace Phong { // TODO: reorganise this and move it out of the raytracer implementation
     Colour calculateLighting(Material material, Tuple4 point, PointLight light, Tuple4 eye_vector, Tuple4 normal_vector); // TODO: make this work with stuff other than point lights
 }

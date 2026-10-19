@@ -28,9 +28,23 @@ struct IntersectionArray { // TODO: add ==, !=, etcetera operators
     IntersectionArray append(const Intersection intersection);
     const Intersection findHit() const;
 
+    IntersectionArray& sortAscending();
+
     IntersectionArray(std::vector<Intersection> _intersections) : intersections(_intersections) {}
     IntersectionArray() : intersections({}) {}
 
     private:
     std::vector<Intersection> intersections;
 };
+
+struct ComputedIntersectionData {
+    public:
+    const float t; // :huh:
+    const Primitive* object; // :buh:
+    const Tuple4 point; // :wuh:
+    const Tuple4 eyev; // :luh:
+    const Tuple4 normalv; // :guh:
+    const bool inside; // :cuh:
+}
+
+ComputedIntersectionData prepareComputations(Intersection i, Ray r); // TODO: maybe make this a member of ComputedIntersectionData?

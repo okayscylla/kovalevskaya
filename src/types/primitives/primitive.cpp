@@ -14,3 +14,7 @@ Primitive& Primitive::transform(const Mat4 operand) {
 
     return *this;
 }
+
+Primitive^ Primitive::init(int _id) {
+    id = _id;
+}

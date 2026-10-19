@@ -1,0 +1,31 @@
+#pragma once
+
+#include "types/primitives/primitive.h"
+#include "types/scene/intersection.h"
+#include "types/scene/light.h"
+
+#include <vector>
+
+
+struct World { // 67 hehe :3
+    public:
+    IntersectionArray intersect(Ray r) const;
+    
+    World& addObject(Primitive object); // TODO: removable objects and lights
+    World& addLight(Light light); // TODO: lights need an id system too, maybe merge objects and lights into one metatype?
+
+    bool isEmpty() const;
+    Primitive atID(int id) const;
+
+    Colour shadeHit(ComputedIntersectionData v) const;
+    Colour colourAt(Ray r) const;
+
+    World(std::vector<Primitive> _objects, std::vector<Light> _lights) : objects(_objects), lights(_lights), next_free_id(_objects.back().id + 1) {}
+    World() : objects({}), lights({}), next_free_id(0) {}
+
+    private:
+    std::vector<Primitive> objects;
+    std::vector<Light> lights;
+
+    int next_free_id; // TODO: implement a better method than april (those who know :3)
+};

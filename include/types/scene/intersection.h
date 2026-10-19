@@ -1,6 +1,8 @@
 #pragma once
 
 #include "maths/constants.h"
+#include "maths/tuple.h"
+#include "types/scene/ray.h"
 
 #include <vector>
 
@@ -45,6 +47,6 @@ struct ComputedIntersectionData {
     const Tuple4 eyev; // :luh:
     const Tuple4 normalv; // :guh:
     const bool inside; // :cuh:
-}
+};
 
 ComputedIntersectionData prepareComputations(Intersection i, Ray r); // TODO: maybe make this a member of ComputedIntersectionData?

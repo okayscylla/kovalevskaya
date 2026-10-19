@@ -9,7 +9,7 @@
 
 class Primitive {
     public:
-    const int id;
+    int id; // TODO: reorganise so this is const
     const Material material;
 
     virtual IntersectionArray intersect(Ray r) const;

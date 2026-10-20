@@ -1,12 +1,16 @@
-#include "main/sceneviewer.h"
+#include "main/main_window.h"
 
 #include "render/raytracer/raytracer.h"
 
 #include "types/scene/world.h"
 #include "types/scene/camera.h"
 
+#include "utils/macros.h"
 
-void KovSceneViewer::init(int w = 1080, int h = 720, std::string title = "KovWindow", int t_fps = 480, World* _world, Camera* _camera) {
+#include <print>
+
+
+void KovSceneViewer::init(int w, int h, std::string title, int t_fps, World* _world, Camera* _camera) {
     width = w; height = h; window_title = title;
 
     world = _world;
@@ -36,7 +40,7 @@ void KovSceneViewer::init(int w = 1080, int h = 720, std::string title = "KovWin
         SDL_GPU_PRESENTMODE_IMMEDIATE
     );
 
-    setTargetFPS(t_fpss);
+    setTargetFPS(t_fps);
 
     setRenderer(new RayTracer); // FIXME: find a better default?
 
@@ -52,6 +56,6 @@ void KovSceneViewer::setRenderer(Renderer* new_renderer) {
 
     renderer = new_renderer;
 
-    renderer->init(_sdlhgpu, _sdlwindow, width, height, &world, &camera);
+    renderer->init(_sdlhgpu, _sdlwindow, width, height, world, camera);
     klog("created new renderer\n");
 }

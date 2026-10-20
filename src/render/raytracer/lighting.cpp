@@ -8,7 +8,7 @@
 #include <cmath>
 
 
-Colour Phong::calculateLighting(Material material, Tuple4 point, PointLight light, Tuple4 eye_vector, Tuple4 normal_vector) {
+Colour calculateLighting(Material material, Tuple4 point, PointLight light, Tuple4 eye_vector, Tuple4 normal_vector) {
     Colour effective_colour = material.colour * light.intensity;
 
     Colour ambient = effective_colour * material.ambient;
@@ -67,6 +67,6 @@ Colour colourAt(World* a, Ray r) {
     } else {
         ComputedIntersectionData v = prepareComputations(x, r);
 
-        return shadeHit(v);
+        return shadeHit(a, v);
     }
 }

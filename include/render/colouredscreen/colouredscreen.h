@@ -7,7 +7,7 @@
 
 class ColouredScreen : public Renderer {
     public:
-    void init(SDL_GPUDevice* gpu, SDL_Window* window, int w, int h);
+    void init(SDL_GPUDevice* gpu, SDL_Window* window, int w, int h, World* _world = nullptr, Camera* _camera = nullptr);
     void cleanup();
 
     void draw();

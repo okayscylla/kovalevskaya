@@ -5,9 +5,6 @@ void Renderer::init(SDL_GPUDevice* gpu, SDL_Window* window, int w, int h, World*
     _hdlgpu = gpu; _hdlwindow = window;
 
     width = w; height = h;
-
-    world = _world;
-    camera = _camera;
 }
 
 void Renderer::cleanup() { return; }

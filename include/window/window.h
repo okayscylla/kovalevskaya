@@ -8,7 +8,7 @@
 
 class KovWindow {
     public:
-    void virtual init(int w = 1080, int h = 720, std::string title = "KovWindow", int t_fps = 480);
+    void virtual init(int w = 1080, int h = 720, std::string title = "KovWindow", int t_fps = 480, World* _world = nullptr, Camera* _camera = nullptr); // FIXME: this is gross
     void setTitle(std::string title);
     void resize(int w, int h);
     void setTargetFPS(int fps);
@@ -31,7 +31,6 @@ class KovWindow {
     const bool* kb_state;
     int curr_frame;
 
-    private:
     bool _quit = false;
     uint64_t _target_ft;
 

@@ -1,12 +1,16 @@
 #include "render/raytracer/raytracer.h"
 
+#include "render/raytracer/lighting.h"
+
 #include <cstdlib>
 
 
-void RayTracer::init(SDL_GPUDevice* gpu, SDL_Window* window, int w, int h) {
+void RayTracer::init(SDL_GPUDevice* gpu, SDL_Window* window, int w, int h, World* _world, Camera* _camera) {
     _hdlgpu = gpu; _hdlwindow = window;
 
     width = w; height = h;
+
+    world = _world; camera = _camera;
 
     pix_buf_size = w * h * sizeof(uint32_t);
 
@@ -113,7 +117,7 @@ void RayTracer::renderFrame() {
     #pragma omp parallel for
     for (int i=0; i < width; i++) {
         for (int j=0; j < height; j++) {
-            Ray r = camera.pixelToRay(i, j);
+            Ray r = camera->pixelToRay(i, j);
             Colour c = colourAt(world, r);
 
             writePixel(i, j, c.toInt());

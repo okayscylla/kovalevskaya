@@ -15,7 +15,7 @@ Camera& Camera::transform(Mat4 _transformation) {
 
 void Camera::updatePixelSize() { // TODO: maybe this should result a reference to self instead of void?
     float half_view = std::tanf((float)fov / 2);
-    float aspect_ratio = (float)camera.width / camera.height; // camera.height is implicitly cast to float
+    float aspect_ratio = (float)width / height; // camera.height is implicitly cast to float
 
     if (aspect_ratio < 1) {
         half_width = half_view * aspect_ratio;
@@ -26,13 +26,6 @@ void Camera::updatePixelSize() { // TODO: maybe this should result a reference t
     }
 
     pixel_size = (half_width * 2) / width; // why does this work
-
-    Tuple4 pixel = transformation.inverse() * Point(world_x, world_y, -1); // why does this work
-    Tuple4 origin = transformation.inverse() * Point(0,0,0);
-
-    Tuple4 direction = (pixel - origin).normalise(); // scawy
-
-    return Ray(origin, direction);
 }
 
 Ray Camera::pixelToRay(int x, int y) {
@@ -41,4 +34,11 @@ Ray Camera::pixelToRay(int x, int y) {
 
     float world_x = half_width - x_offset;
     float world_y = half_height - y_offset;
+
+    Tuple4 pixel = transformation.inverse() * Point(world_x, world_y, -1); // why does this work
+    Tuple4 origin = transformation.inverse() * Point(0,0,0);
+
+    Tuple4 direction = (pixel - origin).normalise(); // scawy
+
+    return Ray(origin, direction);
 }

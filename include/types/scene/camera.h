@@ -22,4 +22,4 @@ struct Camera {
 
     private:
     float half_width, half_height; // TODO: maybe get rid of these?
-}
+};

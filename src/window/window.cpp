@@ -8,7 +8,7 @@
 #include <print>
 
 
-void KovWindow::init(int w, int h, std::string title, int t_fpss) {
+void KovWindow::init(int w, int h, std::string title, int t_fpss, World* _world, Camera* _camera) {
     width = w; height = h; window_title = title;
 
     SDL_Init(SDL_INIT_VIDEO);

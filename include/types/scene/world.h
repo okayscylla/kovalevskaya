@@ -20,7 +20,7 @@ struct World { // 67 hehe :3
     World(std::vector<Primitive*> _objects, std::vector<PointLight*> _lights) : objects(_objects), lights(_lights), next_free_id(_objects.back()->id + 1) {}
     World() : objects({}), lights({}), next_free_id(0) {}
 
-    private:
+    // private: // TODO: refactor so these can be private aga
     std::vector<Primitive*> objects;
     std::vector<PointLight*> lights; // TODO: use Light instead of PointLight (im too lazy to refactor rn)
 

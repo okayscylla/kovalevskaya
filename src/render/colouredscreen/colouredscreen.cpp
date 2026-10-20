@@ -5,7 +5,7 @@
 #include <cstdlib>
 
 
-void ColouredScreen::init(SDL_GPUDevice* gpu, SDL_Window* window, int w, int h) {
+void ColouredScreen::init(SDL_GPUDevice* gpu, SDL_Window* window, int w, int h, World* _world, Camera* _camera) {
     _hdlgpu = gpu; _hdlwindow = window;
 
     width = w; height = h;

@@ -15,13 +15,13 @@ TEST_CASE("constructing a camera") {
 TEST_CASE("calculating pixel size (horizonal canvas)") {
     Camera a = Camera(200, 125, PI / 2);
 
-    CHECK(a.pixel_size == 0.01);
+    CHECK(assertEqual(a.pixel_size, 0.01));
 }
 
 TEST_CASE("calculating pixel size (vertical canvas)") {
     Camera a = Camera(125, 200, PI / 2);
 
-    CHECK(a.pixel_size == 0.01);
+    CHECK(assertEqual(a.pixel_size, 0.01));
 }
 
 TEST_CASE("ray through the centre of canvas") {
@@ -46,8 +46,8 @@ TEST_CASE("ray through centre of canvas (transformed)") {
     Camera a = Camera(201, 101, PI / 2);
     a.transform(RotateY(PI / 4) * Translate(0,-2,5));
 
-    Rary r = a.pixelToRay(100, 50);
+    Ray r = a.pixelToRay(100, 50);
 
     CHECK(r.origin == Point(0,2,-5));
-    CHECK(r.direction == Vector(std::sqrtf(2) / 2),0,-(std::sqrtf(2)) / 2);
+    CHECK(r.direction == Vector(std::sqrtf(2) / 2,0,-(std::sqrtf(2)) / 2));
 }

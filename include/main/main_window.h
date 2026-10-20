@@ -7,9 +7,9 @@
 
 class KovSceneViewer : public KovWindow {
     public:
-    World world; // TODO: maybe move these out of KovWindow to make window library more independent?
-    Camera camera; // TODO: support multible cameras
+    World* world; // TODO: maybe move these out of KovWindow to make window library more independent?
+    Camera* camera; // TODO: support multible cameras
 
-    void init(int w = 1080, int h = 720, std::string title = "KovWindow", int t_fps = 480, World* _world, Camera* _camera);
+    void init(int w, int h, std::string title, int t_fps, World* _world, Camera* _camera);
     void setRenderer(Renderer* new_renderer);
-}
+};

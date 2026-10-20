@@ -3,7 +3,7 @@
 #include "render/renderer.h"
 
 #include "types/scene/world.h"
-#include "types/scene/scene.h"
+#include "types/scene/camera.h"
 
 #include <cstdint>
 

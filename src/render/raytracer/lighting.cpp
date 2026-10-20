@@ -2,6 +2,8 @@
 
 #include "maths/constants.h"
 #include "utils/macros.h"
+#include "types/scene/world.h"
+#include "types/scene/camera.h"
 
 #include <cmath>
 
@@ -38,4 +40,33 @@ Colour Phong::calculateLighting(Material material, Tuple4 point, PointLight ligh
     }
 
     return ambient + diffuse + specular;
+}
+
+Colour shadeHit(World* a, ComputedIntersectionData v) { // FIXME: don't hardcode lighting model
+    // if (v.inside) { // FIXME: make this optimisation work
+    //     Colour effective_colour = v.object->material.colour * lights[0]->intensity;
+    //     return effective_colour * v.object->material.ambient;
+    // } else {
+    return calculateLighting(
+        v.object->material, 
+        v.point,
+        *a->lights[0], // FIXME: do this for every light in scene
+        v.eyev,
+        v.normalv
+    );
+    // }
+}
+
+Colour colourAt(World* a, Ray r) {
+    IntersectionArray xr = a->intersect(r);
+
+    Intersection x = xr.findHit();
+
+    if (x.null) {
+        return Black;
+    } else {
+        ComputedIntersectionData v = prepareComputations(x, r);
+
+        return shadeHit(v);
+    }
 }

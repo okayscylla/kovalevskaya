@@ -5,6 +5,8 @@
 #define isZero(i)                               (std::fabs(i) < EPSILON)
 #define lessThanZero(i)                         ((std::fabs(i) > EPSILON) && (i < 0.f))
 #define moreThanZero(i)                         ((std::fabs(i) > EPSILON) && (i > 0.f))
+#define lessThanN(i, n)                         ((std::fabs(i) > EPSILON) && (i < n))
+#define moreThanN(i, n)                         ((std::fabs(i) > EPSILON) && (i > n))
 
 #define klog(...)                               (std::print("KOV: " __VA_ARGS__))
 

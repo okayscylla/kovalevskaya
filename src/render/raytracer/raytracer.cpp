@@ -110,7 +110,15 @@ void RayTracer::cleanup() {
 }
 
 void RayTracer::renderFrame() {
+    #pragma omp parallel for
+    for (int i=0; i < width; i++) {
+        for (int j=0; j < height; j++) {
+            Ray r = camera.pixelToRay(i, j);
+            Colour c = colourAt(world, r);
 
+            writePixel(i, j, c.toInt());
+        }
+    }
 }
 
 void RayTracer::writePixel(int x, int y, uint32_t value) {

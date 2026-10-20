@@ -24,7 +24,7 @@ TEST_CASE("phong lighting with the eye between light and surface") {
     Tuple4 normal_vector = Vector(0, 0, -1);
     PointLight light = PointLight(Point(0, 0, -10), Colour(1, 1, 1));
 
-    Colour lighting = Phong::calculateLighting(material, position, light, eye_vector, normal_vector);
+    Colour lighting = calculateLighting(material, position, light, eye_vector, normal_vector);
 
     CHECK(lighting == Colour(1.9, 1.9, 1.9));
 }
@@ -36,7 +36,7 @@ TEST_CASE("phong lighting with the eye between light and surface (eye offset pi 
     Tuple4 normal_vector = Vector(0, 0, -1);
     PointLight light = PointLight(Point(0, 0, -10), Colour(1, 1, 1));
 
-    Colour lighting = Phong::calculateLighting(material, position, light, eye_vector, normal_vector);
+    Colour lighting = calculateLighting(material, position, light, eye_vector, normal_vector);
 
     CHECK(lighting == Colour(1.f, 1.f, 1.f));
 }
@@ -48,7 +48,7 @@ TEST_CASE("phong lighting with the eye oppsite surface (light offset pi / 4 radi
     Tuple4 normal_vector = Vector(0, 0, -1);
     PointLight light = PointLight(Point(0, 10, -10), Colour(1, 1, 1));
 
-    Colour lighting = Phong::calculateLighting(material, position, light, eye_vector, normal_vector);
+    Colour lighting = calculateLighting(material, position, light, eye_vector, normal_vector);
 
     CHECK(lighting == Colour(0.7364, 0.7364, 0.7364));
 }
@@ -60,7 +60,7 @@ TEST_CASE("lighting with eye in the path of reflection vector") {
     Tuple4 normal_vector = Vector(0, 0, -1);
     PointLight light = PointLight(Point(0, 10, -10), Colour(1, 1, 1));
 
-    Colour lighting = Phong::calculateLighting(material, position, light, eye_vector, normal_vector);
+    Colour lighting = calculateLighting(material, position, light, eye_vector, normal_vector);
 
     CHECK(lighting == Colour(1.63639, 1.63639, 1.63639));
 }
@@ -72,7 +72,7 @@ TEST_CASE("phong lighting with light behind surface") {
     Tuple4 normal_vector = Vector(0, 0, -1);
     PointLight light = PointLight(Point(0, 0, 10), Colour(1, 1, 1));
 
-    Colour lighting = Phong::calculateLighting(material, position, light, eye_vector, normal_vector);
+    Colour lighting = calculateLighting(material, position, light, eye_vector, normal_vector);
 
     CHECK(lighting == Colour(0.1, 0.1, 0.1));
 }

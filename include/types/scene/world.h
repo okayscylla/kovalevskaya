@@ -17,9 +17,6 @@ struct World { // 67 hehe :3
     bool isEmpty() const;
     Primitive* atID(int id);
 
-    Colour shadeHit(ComputedIntersectionData v) const;
-    Colour colourAt(Ray r) const;
-
     World(std::vector<Primitive*> _objects, std::vector<PointLight*> _lights) : objects(_objects), lights(_lights), next_free_id(_objects.back()->id + 1) {}
     World() : objects({}), lights({}), next_free_id(0) {}
 

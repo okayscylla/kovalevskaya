@@ -41,7 +41,7 @@ TEST_CASE("shading an intersection (outside)") {
         Ray(Point(0,0,-5),Vector(0,0,1))
     );
 
-    Colour c = a.shadeHit(v);
+    Colour c = shadeHit(&a, v);
 
     CHECK(c == Colour(0.380661,0.475827,0.285496));
 }
@@ -63,7 +63,7 @@ TEST_CASE("shading an intersection (inside)") {
 
     CHECK(v.inside == true);
 
-    Colour c = a.shadeHit(v);
+    Colour c = shadeHit(&a, v);
 
     CHECK(c == Colour(0.904984,0.904984,0.904984));
 }
@@ -72,7 +72,7 @@ TEST_CASE("the colour when a ray misses") {
     World a = DefaultWorld;
     Ray r = Ray(Point(0,0,-5),Vector(0,1,0));
 
-    Colour c = a.colourAt(r);
+    Colour c = colourAt(&a, r);
 
     CHECK(c == Black);
 }
@@ -81,7 +81,7 @@ TEST_CASE("the colour when a ray hits") {
     World a = DefaultWorld;
     Ray r = Ray(Point(0,0,-5),Vector(0,0,1));
 
-    Colour c = a.colourAt(r);
+    Colour c = colourAt(&a, r);
 
     CHECK(c == Colour(0.380661,0.475827,0.285496));
 }
@@ -93,7 +93,7 @@ TEST_CASE("the colour at at an intersection behind the ray") {
     a.atID(1)->material = m;
     Ray r = Ray(Point(0,0,0.75),Vector(0,0,-1));
 
-    Colour c = a.colourAt(r);
+    Colour c = colourAt(&a, r);
 
     CHECK(c == a.atID(1)->material.colour);
 }

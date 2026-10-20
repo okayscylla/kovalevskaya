@@ -2,12 +2,15 @@
 
 #include "render/renderer.h"
 
+#include "types/scene/world.h"
+#include "types/scene/scene.h"
+
 #include <cstdint>
 
 
 class RayTracer : public Renderer {
     public:
-    void init(SDL_GPUDevice* gpu, SDL_Window* window, int w, int h);
+    void init(SDL_GPUDevice* gpu, SDL_Window* window, int w, int h, World* _world, Camera* _camera);
     void cleanup();
 
     void draw();
@@ -18,6 +21,9 @@ class RayTracer : public Renderer {
 
     uint32_t* pix_buf;
     uint32_t pix_buf_size;
+
+    World* world;
+    Camera* camera;
 
     SDL_GPUTransferBuffer* _g_tbhdl;
     SDL_GPUTexture* _g_imthdl;

@@ -13,9 +13,9 @@ class KovWindow {
     void resize(int w, int h);
     void setTargetFPS(int fps);
 
-    void virtual poll();
+    void virtual poll(); // to be overriden by user
 
-    void setRenderer(Renderer* new_renderer);
+    void virtual setRenderer(Renderer* new_renderer);
     void draw();
 
     void virtual gracefulExit();
@@ -23,7 +23,7 @@ class KovWindow {
 
     void virtual mainloop();
 
-    int width, height;
+    int width, height; // TODO: fix inconsistent formatting / style between older (this) and newer (i.e. World) code
     std::string window_title;
 
     protected:

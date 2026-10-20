@@ -1,6 +1,6 @@
 #include "window/window.h"
 
-#include "render/colouredscreen/colouredscreen.h"
+#include "render/renderer.h"
 #include "utils/macros.h"
 
 #include <SDL3/SDL.h>
@@ -37,7 +37,7 @@ void KovWindow::init(int w, int h, std::string title, int t_fpss) {
 
     setTargetFPS(t_fpss);
 
-    setRenderer(new ColouredScreen);
+    setRenderer(new Renderer); // FIXME: find a better default?
 
     kb_state = SDL_GetKeyboardState(NULL); // FIXME: is this even necessary?
 }

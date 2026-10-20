@@ -57,7 +57,7 @@ TEST_CASE("shading an intersection (inside)") {
         }
     );
     ComputedIntersectionData v = prepareComputations(
-        Intersection(0.5, a.atID(0)),
+        Intersection(0.5, a.atID(1)),
         Ray(Point(0,0,0),Vector(0,0,1))
     );
 
@@ -65,11 +65,7 @@ TEST_CASE("shading an intersection (inside)") {
 
     Colour c = a.shadeHit(v);
 
-    CHECK(c.red == 0.90498);
-    CHECK(c.green == 0.90498);
-    CHECK(c.blue == 0.90498);
-
-    CHECK(c == Colour(0.90498,0.90498,0.90498));
+    CHECK(c == Colour(0.904984,0.904984,0.904984));
 }
 
 TEST_CASE("the colour when a ray misses") {

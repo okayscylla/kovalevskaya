@@ -104,9 +104,9 @@ TEST_CASE("lighting with a surface in shadow") {
     PointLight light = PointLight(Point(0,0,-10),Colour(1,1,1));
     bool in_shadow = true;
 
-    Colour result = calculateLighting(Material(),Point(0,0,0),eyev,normalv,in_shadow);
+    Colour result = calculateLighting(Material(),Point(0,0,0),light,eyev,normalv,in_shadow);
 
-    CHECK(result == Colour(0,1,0.1,0.1));
+    CHECK(result == Colour(0.1,0.1,0.1));
 }
 
 TEST_CASE("the shadow when nothing when nothing is collinear with point and light") {
@@ -133,13 +133,15 @@ TEST_CASE("the shadow when object is behind the point") {
 TEST_CASE("shading a hit that lies in shadow") {
     World a = World();
     a.addLight(new PointLight(Point(0,0,-10),Colour(1,1,1)));
-    a.addObject((new Sphere(-1))->transform(Translate(0,0,10)));
+    a.addObject(new Sphere(-1));
+    a.addObject(new Sphere(-1));
+    a.atID(1)->transform(Translate(0,0,10));
 
     Ray r = Ray(Point(0,0,5),Vector(0,0,1));
-    Intersection x = Intersection(4, a->atID(1));
+    Intersection x = Intersection(4, a.atID(1));
 
-    ComputedIntersectionData c = prepareComputations(x, r);
-    Colour c = shadeHit(&a, c);
+    ComputedIntersectionData v = prepareComputations(x, r);
+    Colour c = shadeHit(&a, v);
 
     CHECK(c == Colour(0.1,0.1,0.1));
 }

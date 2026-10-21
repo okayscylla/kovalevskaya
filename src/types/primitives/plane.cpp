@@ -10,10 +10,10 @@ IntersectionArray Plane::localIntersect(Ray r) const {
         return IntersectionArray();
     }
 
-    int t = -ray.origin.y / ray.direction.y;
+    int t = -r.origin.y / r.direction.y;
 
     return IntersectionArray(
-        {Intersection(t, this)}
+        {Intersection(t, const_cast<Plane*>(this))} // this is unsafe
     );
 }
 

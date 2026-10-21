@@ -8,7 +8,7 @@
 #include <cmath>
 
 
-Colour calculateLighting(Material material, Tuple4 point, PointLight light, Tuple4 eye_vector, Tuple4 normal_vector) {
+Colour calculateLighting(Material material, Tuple4 point, PointLight light, Tuple4 eye_vector, Tuple4 normal_vector, bool is_shadowed) {
     Colour effective_colour = material.colour * light.intensity;
 
     Colour ambient = effective_colour * material.ambient;
@@ -21,7 +21,7 @@ Colour calculateLighting(Material material, Tuple4 point, PointLight light, Tupl
 
     if (isZero(on_surface_side)) { on_surface_side = 0.f; }
 
-    if (on_surface_side < 0) {
+    if ((on_surface_side < 0) || (is_shadowed)) {
         return ambient; // point is not in view of light source o7 :frown:
     } else {
         diffuse = effective_colour * material.diffuse * on_surface_side;
@@ -48,16 +48,17 @@ Colour shadeHit(World* a, ComputedIntersectionData v) { // FIXME: don't hardcode
     //     return effective_colour * v.object->material.ambient;
     // } else {
 
-    Point p_offset = v.point + (v.normalv * EPSILON); // offset point by a tiny bit to bprevent screen ance
+    Tuple4 p_offset = v.point + (v.normalv * EPSILON); // offset point by a tiny bit to bprevent screen ance
 
-    bool shadowed = isShadowed(&a, p_offset);
+    bool shadowed = isShadowed(a, p_offset);
 
     return calculateLighting(
         v.object->material,
         p_offset, // FIXME: should p_offset be precomputed in prepareComputations?
         *a->lights[0], // FIXME: do this for every light in scene
         v.eyev,
-        v.normalv
+        v.normalv,
+        shadowed
     );
     // }
 }
@@ -74,10 +75,11 @@ Colour colourAt(World* a, Ray r, Colour c) {
 
         return shadeHit(a, v);
     }
+    return c;
 }
 
 bool isShadowed(World* a, Tuple4 p) {
-    Tuple4 v = w->lights[0]->position - p; // spooky stories tell teachers abt little vro
+    Tuple4 v = a->lights[0]->position - p; // spooky stories tell teachers abt little vro
     float dist = v.magnitude();
 
     v.normalise();
@@ -87,7 +89,7 @@ bool isShadowed(World* a, Tuple4 p) {
 
     Intersection h = xr.findHit();
 
-    if (!h.null && (h.t < distance)) {
+    if (!h.null && (h.t < dist)) {
         return true;
     }
 

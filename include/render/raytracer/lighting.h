@@ -9,7 +9,7 @@
 #include "utils/macros.h"
 
 
-Colour calculateLighting(Material material, Tuple4 point, PointLight light, Tuple4 eye_vector, Tuple4 normal_vector); // TODO: make this work with stuff other than point lights
+Colour calculateLighting(Material material, Tuple4 point, PointLight light, Tuple4 eye_vector, Tuple4 normal_vector, bool is_shadowed); // TODO: make this work with stuff other than point lights
 
 Colour shadeHit(World* a, ComputedIntersectionData v);
 

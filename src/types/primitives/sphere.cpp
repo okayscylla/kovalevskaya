@@ -30,7 +30,7 @@ IntersectionArray Sphere::localIntersect(Ray r) const {
 }
 
 Tuple4 Sphere::localNormalAt(const Tuple4 p) const { // FIXME: does this even have to exist
-    Tuple4 local_normal = local_point - Point(0, 0, 0); // FIXME: see above
+    Tuple4 local_normal = p - Point(0, 0, 0); // FIXME: see above
 
     return local_normal;
 }

@@ -9,9 +9,9 @@ TEST_CASE("planes have constant normals") {
     Plane p = Plane(-1);
 
     CHECK(p.normalAt(Point(0,0,0), false) == Vector(0,1,0));
-    CHECK(p.normalAt(Point(0,0,0), false) == Vector(10,0,1-));
-    CHECK(p.normalAt(Point(0,0,0), false) == Vector(5,1,150));
-    CHECK(p.normalAt(Point(0,0,0), false) == Vector(67,0,78));
+    CHECK(p.normalAt(Point(10,0,-1), false) == Vector(0,1,0));
+    CHECK(p.normalAt(Point(5,1,150), false) == Vector(0,1,0));
+    CHECK(p.normalAt(Point(67,0,78), false) == Vector(0,1,0));
 }
 
 TEST_CASE("intersecting a plane with a parllel ray") {
@@ -40,7 +40,7 @@ TEST_CASE("intersecting a plane with a ray from above") {
 
     CHECK(xr.size() == 1);
     CHECK(xr[0].t == 1);
-    CHECK(xr[0].object == &a);
+    CHECK(xr[0].object == &p);
 }
 
 TEST_CASE("intersecting a plane with a ray from below") {
@@ -51,5 +51,5 @@ TEST_CASE("intersecting a plane with a ray from below") {
 
     CHECK(xr.size() == 1);
     CHECK(xr[0].t == 1);
-    CHECK(xr[0].object == &a);
+    CHECK(xr[0].object == &p);
 }

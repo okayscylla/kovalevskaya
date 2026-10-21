@@ -92,10 +92,10 @@ void IntersectionArray::popNullIntersections() { // TODO: optimise this / is it 
             intersections.begin(),
             intersections.end(),
             [](const Intersection a) {
-                return v.null;
-            },
-            intersections.end()
-        )
+                return a.null;
+            }
+        ),
+        intersections.end()
     );
 }
 

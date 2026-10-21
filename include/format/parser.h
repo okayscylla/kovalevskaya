@@ -1,9 +1,9 @@
 #pragma once
 
-#include "types/basic/world.h"
+#include "types/scene/world.h"
 
 #include <string>
-#include <fstream>
+// #include <fstream>
 
 
 World loadFromSillyFile(std::string infile); // TODO: implement this;

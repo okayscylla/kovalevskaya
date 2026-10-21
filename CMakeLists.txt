@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-add_compile_options(-Wall -O3 -fopenmp -march=native -funroll-loops)
+add_compile_options(-Wall -O3 -fopenmp -march=native -funroll-loops -ffast-math)
 
 find_package(SDL3 REQUIRED)
 

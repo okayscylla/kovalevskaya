@@ -57,7 +57,7 @@ int main() {
 
     camera.transform(Translate(0, 0, 0));
 
-    window.init(1080, 720, "KovSceneViewer", 30, &world, &camera);
+    window.init(1080, 720, "KovSceneViewer", 15, &world, &camera);
 
     window.mainloop();
 

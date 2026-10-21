@@ -28,7 +28,7 @@ struct IntersectionArray { // TODO: add ==, !=, etcetera operators
 
     int size() const;
     IntersectionArray append(const Intersection intersection);
-    const Intersection findHit() const;
+    const Intersection findHit();
 
     IntersectionArray& sortAscending();
 

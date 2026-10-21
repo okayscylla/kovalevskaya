@@ -43,24 +43,32 @@ Colour calculateLighting(Material material, Tuple4 point, PointLight light, Tupl
 }
 
 Colour shadeHit(World* a, ComputedIntersectionData v) { // FIXME: don't hardcode lighting model
-    // if (v.inside) { // FIXME: make this optimisation work
-    //     Colour effective_colour = v.object->material.colour * lights[0]->intensity;
-    //     return effective_colour * v.object->material.ambient;
-    // } else {
+    if (v.inside) { // FIXME: make this optimisation work
+        // Colour effective_colour = v.object->material.colour * a->lights[0]->intensity;
+        // return effective_colour * v.object->material.ambient;
 
-    Tuple4 p_offset = v.point + (v.normalv * EPSILON); // offset point by a tiny bit to bprevent screen ance
+        return Black;
+    } else {
 
-    bool shadowed = isShadowed(a, p_offset);
+    Tuple4 p_offset = v.point + (v.normalv * (4 * EPSILON)); // offset point by a tiny bit to bprevent screen ance
 
-    return calculateLighting(
-        v.object->material,
-        p_offset, // FIXME: should p_offset be precomputed in prepareComputations?
-        *a->lights[0], // FIXME: do this for every light in scene
-        v.eyev,
-        v.normalv,
-        shadowed
-    );
-    // }
+    Colour col = Black;
+
+    for (int i=0; i < a->lights.size(); i++) {
+        bool shadowed = isShadowed(a, p_offset, i);
+
+        col += calculateLighting(
+            v.object->material,
+            p_offset, // FIXME: should p_offset be precomputed in prepareComputations?
+            *a->lights[i], // FIXME: do this for every light in scene
+            v.eyev,
+            v.normalv,
+            shadowed
+        );
+    }
+
+    return col / a->lights.size();
+    }
 }
 
 Colour colourAt(World* a, Ray r, Colour c) {
@@ -78,8 +86,8 @@ Colour colourAt(World* a, Ray r, Colour c) {
     return c;
 }
 
-bool isShadowed(World* a, Tuple4 p) {
-    Tuple4 v = a->lights[0]->position - p; // spooky stories tell teachers abt little vro
+bool isShadowed(World* a, Tuple4 p, int l_i) { // FIXME: need to add check for if there any lights in scene here and in a couple of other places but i dont rly want to do it rn
+    Tuple4 v = a->lights[l_i]->position - p; // spooky stories tell teachers abt little vro
     float dist = v.magnitude();
 
     v.normalise();

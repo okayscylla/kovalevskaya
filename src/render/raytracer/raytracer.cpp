@@ -114,7 +114,8 @@ void RayTracer::cleanup() {
 }
 
 void RayTracer::renderFrame() {
-    #pragma omp parallel for
+    // #pragma omp target teams distribute parallel for schedule(static)
+    #pragma omp parallel for schedule(static)
     for (int i=0; i < width; i++) {
         for (int j=0; j < height; j++) {
             Ray r = camera->pixelToRay(i, j);

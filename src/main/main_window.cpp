@@ -91,8 +91,8 @@ void KovSceneViewer::poll() {
         camera->transform(Translate(0, movement_speed, 0));
     }
 
-    // camera->transform(RotateY(rel_mx / 1000)); // TODO: make this work
-    camera->transform(RotateX(rel_my / 1000)); // TODO: make this work
+    camera->transform(RotateY(rel_mx / 1000)); // TODO: make this work
+    // camera->transform(RotateX(rel_my / 1000)); // TODO: make this work
 }
 
 void KovSceneViewer::setRenderer(Renderer* new_renderer) {

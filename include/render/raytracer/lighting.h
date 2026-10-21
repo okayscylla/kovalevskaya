@@ -15,4 +15,4 @@ Colour shadeHit(World* a, ComputedIntersectionData v);
 
 Colour colourAt(World* a, Ray r, Colour c = Black);
 
-bool isShadowed(World* a, Tuple4 p);
+bool isShadowed(World* a, Tuple4 p, int l_i);

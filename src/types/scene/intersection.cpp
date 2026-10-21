@@ -46,7 +46,9 @@ IntersectionArray IntersectionArray::append(const Intersection intersection) {
     return *this;
 }
 
-const Intersection IntersectionArray::findHit() const { // intersection with lowest nonnegative value
+const Intersection IntersectionArray::findHit() { // intersection with lowest nonnegative value
+    sortAscending();
+
     if (size() > 0) {
         int v = 0;
 

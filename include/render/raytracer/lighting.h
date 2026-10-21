@@ -13,4 +13,6 @@ Colour calculateLighting(Material material, Tuple4 point, PointLight light, Tupl
 
 Colour shadeHit(World* a, ComputedIntersectionData v);
 
-Colour colourAt(World* a, Ray r, Colour sky_colour = Black);
+Colour colourAt(World* a, Ray r, Colour c = Black);
+
+bool isShadowed(World* a, Tuple4 p);

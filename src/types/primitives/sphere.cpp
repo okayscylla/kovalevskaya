@@ -6,9 +6,7 @@
 #include <cmath>
 
 
-IntersectionArray Sphere::intersect(Ray r) const {
-    r = r.transform(transformation.inverse());
-
+IntersectionArray Sphere::localIntersect(Ray r) const {
     Tuple4 sphere_ray = (r.origin - Point(0, 0, 0)); // FIXME: add support for centers other than the world origin
 
     float a = r.direction.dot(r.direction);
@@ -31,16 +29,8 @@ IntersectionArray Sphere::intersect(Ray r) const {
     return IntersectionArray({t1, t2});
 }
 
-Tuple4 Sphere::normalAt(const Tuple4 p, bool world_space) const {
-    Tuple4 local_point = transformation.inverse() * p;
+Tuple4 Sphere::localNormalAt(const Tuple4 p) const { // FIXME: does this even have to exist
     Tuple4 local_normal = local_point - Point(0, 0, 0); // FIXME: see above
 
-    if (world_space) {
-        Tuple4 world_normal = transformation.inverse().transpose() * local_normal;
-        world_normal.w = 0; // sketchy hack :peepoScared:
-
-        return world_normal.normalise();
-    } else {
-        return local_normal.normalise();
-    }
+    return local_normal;
 }

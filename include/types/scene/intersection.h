@@ -37,6 +37,8 @@ struct IntersectionArray { // TODO: add ==, !=, etcetera operators
 
     private:
     std::vector<Intersection> intersections;
+
+    void popNullIntersections();
 };
 
 struct ComputedIntersectionData {

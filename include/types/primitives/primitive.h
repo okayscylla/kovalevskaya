@@ -12,9 +12,9 @@ class Primitive {
     int id; // TODO: reorganise so this is const
     Material material;
 
-    virtual IntersectionArray intersect(Ray r) const;
-    virtual Tuple4 normalAt(const Tuple4 p, bool world_space = true) const;
-    
+    IntersectionArray intersect(Ray r) const;
+    Tuple4 normalAt(const Tuple4 p, bool world_space = true) const;
+
     Primitive& transform(const Mat4 operand); // TODO: implement Primitive::transformed / decide what that should do
     Primitive& init(int _id);
 
@@ -26,4 +26,7 @@ class Primitive {
 
     protected:
     Mat4 transformation = Mat4(); // yay identity matrix :3
+
+    virtual IntersectionArray localIntersect(Ray r) const; // to be overriden by subclasses
+    virtual Tuple4 localNormalAt(const Tuple4 p) const; // to be overriden by subclasses
 };

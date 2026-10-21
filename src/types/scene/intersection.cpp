@@ -73,15 +73,30 @@ const Intersection IntersectionArray::findHit() const { // intersection with low
 }
 
 IntersectionArray& IntersectionArray::sortAscending() {
+    popNullIntersections();
+
     std::sort(
         intersections.begin(),
         intersections.end(),
-        [](Intersection a, Intersection b) { // lambda functions my beloved
+        [](const Intersection a, const Intersection b) { // lambda functions my beloved
             return a.t < b.t;
         }
     );
 
     return *this;
+}
+
+void IntersectionArray::popNullIntersections() { // TODO: optimise this / is it even necessary?
+    intersections.erase(
+        std::remove_if(
+            intersections.begin(),
+            intersections.end(),
+            [](const Intersection a) {
+                return v.null;
+            },
+            intersections.end()
+        )
+    );
 }
 
 ComputedIntersectionData prepareComputations(Intersection i, Ray r) { // FIXME: why is this in types

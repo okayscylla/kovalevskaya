@@ -10,6 +10,12 @@ class KovSceneViewer : public KovWindow {
     World* world; // TODO: maybe move these out of KovWindow to make window library more independent?
     Camera* camera; // TODO: support multible cameras
 
+    void poll();
+
     void init(int w, int h, std::string title, int t_fps, World* _world, Camera* _camera);
     void setRenderer(Renderer* new_renderer);
+
+    private:
+    float movement_speed = 0.05;
+    bool capture_mouse = true;
 };

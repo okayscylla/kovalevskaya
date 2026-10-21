@@ -8,6 +8,7 @@
 #include "utils/macros.h"
 
 #include <print>
+#include <cmath>
 
 
 void KovSceneViewer::init(int w, int h, std::string title, int t_fps, World* _world, Camera* _camera) {
@@ -40,11 +41,58 @@ void KovSceneViewer::init(int w, int h, std::string title, int t_fps, World* _wo
         SDL_GPU_PRESENTMODE_IMMEDIATE
     );
 
-    setTargetFPS(t_fps);
+    SDL_SetWindowRelativeMouseMode(_sdlwindow, capture_mouse);
 
+    setTargetFPS(t_fps);
     setRenderer(new RayTracer); // FIXME: find a better default?
 
     kb_state = SDL_GetKeyboardState(NULL); // FIXME: is this even necessary?
+}
+
+void KovSceneViewer::poll() {
+    float rel_mx, rel_my;
+
+    SDL_GetRelativeMouseState(&rel_mx, &rel_my);
+
+    while (SDL_PollEvent(_sdlevent)) {
+        switch (_sdlevent->type) {
+            case SDL_EVENT_QUIT:
+                gracefulExit();
+                break;
+            case SDL_EVENT_KEY_DOWN:
+                switch (_sdlevent->key.scancode) {
+                    case SDL_SCANCODE_UP: // should probably be checking keycode instead of scancode but i dont care enough
+                        movement_speed *= 2;
+                        break;
+                    case SDL_SCANCODE_DOWN:
+                        movement_speed /= 2;
+                        break;
+                    case SDL_SCANCODE_ESCAPE:
+                        capture_mouse = !capture_mouse;
+
+                        SDL_SetWindowRelativeMouseMode(_sdlwindow, capture_mouse);
+                    default: break;
+                }
+            default: break;
+        }
+    }
+
+    if (kb_state[SDL_SCANCODE_W]) { // FIXME: make this framerate independent
+        camera->transform(Translate(0, 0, movement_speed));
+    } if (kb_state[SDL_SCANCODE_S]) {
+        camera->transform(Translate(0, 0, -movement_speed));
+    } if (kb_state[SDL_SCANCODE_D]) {
+        camera->transform(Translate(movement_speed, 0, 0));
+    } if (kb_state[SDL_SCANCODE_A]) {
+        camera->transform(Translate(-movement_speed, 0, -0));
+    } if (kb_state[SDL_SCANCODE_SPACE]) {
+        camera->transform(Translate(0, -movement_speed, 0));
+    } if (kb_state[SDL_SCANCODE_LSHIFT]) {
+        camera->transform(Translate(0, movement_speed, 0));
+    }
+
+    camera->transform(RotateZ(rel_mx / 1000));
+    camera->transform(RotateX(rel_my / 1000));
 }
 
 void KovSceneViewer::setRenderer(Renderer* new_renderer) {

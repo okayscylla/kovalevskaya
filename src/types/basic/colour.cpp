@@ -36,7 +36,8 @@ Colour Colour::operator*(const double scalar) const {
 }
 
 Colour Colour::operator/(const double scalar) const {
-    if (notZero(scalar)) { 
+    // if (notZero(scalar)) {
+    if (scalar != 0) {
         return Colour(red / scalar, green / scalar, blue / scalar);
     } else {
         return Colour(0, 0, 0);
@@ -52,7 +53,8 @@ Colour& Colour::operator*=(const double scalar) {
 }
 
 Colour& Colour::operator/=(const double scalar) {
-    if (notZero(scalar)) {
+    // if (notZero(scalar)) {
+    if (scalar != 0) {
         red /= scalar;
         green /= scalar;
         blue /= scalar;
@@ -104,7 +106,8 @@ float Colour::magnitude() const {
 Colour& Colour::normalise() {
     float m = magnitude();
 
-    if (notZero(m)) {
+    // if (notZero(m)) {
+    if (m != 0) {
         red /= m;
         green /= m;
         blue /= m;

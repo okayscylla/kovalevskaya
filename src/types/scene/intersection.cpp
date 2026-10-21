@@ -64,7 +64,8 @@ const Intersection IntersectionArray::findHit() { // intersection with lowest no
             }
         }
 
-        if ((intersections[v].t > 0) && notZero(intersections[v].t)) {
+        // if ((intersections[v].t > 0) && notZero(intersections[v].t)) {
+        if ((intersections[v].t > 0) && (intersections[v].t != 0)) {
             return intersections[v];
         } else {
             return Intersection(); // null intersection (no hit)

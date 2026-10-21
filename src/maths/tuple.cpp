@@ -35,7 +35,8 @@ Tuple3 Tuple3::operator*(const double scalar) const {
 }
 
 Tuple3 Tuple3::operator/(const double scalar) const {
-    if (notZero(scalar)) { 
+    // if (notZero(scalar)) { 
+    if (scalar != 0) {
         return Tuple3(x * scalar, y * scalar, z * scalar);
     } else {
         return Tuple3(0, 0, 0);
@@ -51,7 +52,8 @@ Tuple3& Tuple3::operator*=(const double scalar) {
 }
 
 Tuple3& Tuple3::operator/=(const double scalar) {
-    if (notZero(scalar)) {
+    // if (notZero(scalar)) {
+    if (scalar != 0) {
         x /= scalar;
         y /= scalar;
         z /= scalar;
@@ -87,7 +89,8 @@ Tuple3 Tuple3::negated() const {
 Tuple3 Tuple3::unitVector() const {
     float m = magnitude();
 
-    if (notZero(m)) {
+    // if (notZero(m)) {
+    if (m != 0) {
         return Tuple3(x / m, y / m, z / m);
     }
 
@@ -101,7 +104,8 @@ float Tuple3::magnitude() const {
 Tuple3& Tuple3::normalise() {
     float m = magnitude();
 
-    if (notZero(m)) {
+    // if (notZero(m)) {
+    if (m != 0) {
         x /= m;
         y /= m;
         z /= m;
@@ -157,7 +161,8 @@ Tuple4 Tuple4::operator*(const double scalar) const {
 }
 
 Tuple4 Tuple4::operator/(const double scalar) const {
-    if (notZero(scalar)) { 
+    // if (notZero(scalar)) {
+    if (scalar != 0) {
         return Tuple4(x / scalar, y / scalar, z / scalar, w / scalar);
     } else {
         return Tuple4(0, 0, 0, 0);
@@ -174,7 +179,8 @@ Tuple4& Tuple4::operator*=(const double scalar) {
 }
 
 Tuple4& Tuple4::operator/=(const double scalar) {
-    if (notZero(scalar)) {
+    // if (notZero(scalar)) {
+    if (scalar != 0) {
         x /= scalar;
         y /= scalar;
         z /= scalar;
@@ -213,7 +219,8 @@ Tuple4 Tuple4::negated() const {
 Tuple4 Tuple4::unitVector() const {
     float m = magnitude();
 
-    if (notZero(m)) {
+    // if (notZero(m)) {
+    if (m != 0) {
         return Tuple4(x / m, y / m, z / m, 0); // w=0 means vector
     }
 

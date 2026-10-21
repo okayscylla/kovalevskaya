@@ -22,7 +22,8 @@ IntersectionArray Sphere::localIntersect(Ray r) const {
     Intersection t1 = Intersection(((-0.5f * (b - (std::sqrtf(discriminant)))) / a), const_cast<Sphere*>(this)); // FIXME: this is a terrible idea
     Intersection t2 = Intersection(((-0.5f * (b + (std::sqrtf(discriminant)))) / a), const_cast<Sphere*>(this)); // FIXME: this is a terrible idea
 
-    if (notZero(t1.t - t2.t) && t1.t > t2.t) {
+    // if (notZero(t1.t - t2.t) && t1.t > t2.t) {
+    if ((t1.t - t2.t) != 0) {
         return IntersectionArray({t2, t1});
     }
 

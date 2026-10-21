@@ -6,8 +6,6 @@
 #include "types/primitives/sphere.h"
 #include "types/scene/light.h"
 
-#include "render/raytracer/raytracer.h"
-
 
 int main() {
     KovSceneViewer window = KovSceneViewer();
@@ -41,7 +39,7 @@ int main() {
 
     world.atID(1)->transform(Translate(0, 4, 0));
 
-    Camera camera = Camera(1080, 720, PI / 2);
+    Camera camera = Camera(1080, 720, degToRad(95.f));
 
     window.init(1080, 720, "KovSceneViewer", 480, &world, &camera);
 

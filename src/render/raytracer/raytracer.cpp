@@ -118,6 +118,7 @@ void RayTracer::renderFrame() {
     for (int i=0; i < width; i++) {
         for (int j=0; j < height; j++) {
             Ray r = camera->pixelToRay(i, j);
+            // Colour c = colourAt(world, r, Colour(0.5098039215686274,0.7843137254901961,0.8980392156862745)); // FIXME: don't hardcode sky colour
             Colour c = colourAt(world, r);
 
             writePixel(i, j, c.toInt());

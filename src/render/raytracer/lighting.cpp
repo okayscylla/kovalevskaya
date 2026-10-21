@@ -57,13 +57,13 @@ Colour shadeHit(World* a, ComputedIntersectionData v) { // FIXME: don't hardcode
     // }
 }
 
-Colour colourAt(World* a, Ray r) {
+Colour colourAt(World* a, Ray r, Colour sky_colour) {
     IntersectionArray xr = a->intersect(r);
 
     Intersection x = xr.findHit();
 
     if (x.null) {
-        return Black;
+        return sky_colour; // TODO: refactor this
     } else {
         ComputedIntersectionData v = prepareComputations(x, r);
 

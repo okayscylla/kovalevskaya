@@ -8,6 +8,9 @@
 #define lessThanN(i, n)                         ((std::fabs(i) > EPSILON) && (i < n))
 #define moreThanN(i, n)                         ((std::fabs(i) > EPSILON) && (i > n))
 
+#define degToRad(v)                             (v * (PI / 180))
+#define radToDeg(v)                             (v * (180 / PI))
+
 #define klog(...)                               (std::print("KOV: " __VA_ARGS__))
 
 #define Translate(x, y, z)                      Mat4({1,0,0,x,0,1,0,y,0,0,1,z,0,0,0,1})
